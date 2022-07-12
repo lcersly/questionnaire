@@ -1,0 +1,13 @@
+<button *ngIf="previous"
+        mat-raised-button
+        [routerLink]="previous.link"
+>
+  {{previous.text}}
+</button>
+<button *ngIf="next"
+        [routerLink]="next.link"
+        mat-raised-button
+        [disabled]="!next.enableWithoutAnswer && (questionService.currentQuestionHasNoAnswer$ | async)"
+>
+  {{next.text}}
+</button>

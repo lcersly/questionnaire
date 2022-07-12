@@ -1,0 +1,5 @@
+<mat-radio-group [formControl]="form">
+  <mat-radio-button *ngFor="let element of answers; let i = index" [value]="i" color="primary">
+    {{element.content}}
+  </mat-radio-button>
+</mat-radio-group>

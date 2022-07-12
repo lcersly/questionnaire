@@ -1,0 +1,27 @@
+<form (ngSubmit)="submit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput [formControl]="emailControl" placeholder="Ex. pat@example.com">
+    <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+      Udfyld en gyldig email adresse
+    </mat-error>
+    <mat-error *ngIf="emailControl.hasError('required')">
+      Email er <strong>krævet</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Navn</mat-label>
+    <input type="text" matInput [formControl]="nameControl">
+    <mat-error *ngIf="nameControl.hasError('required')">
+      Navn er <strong>krævet</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button routerLink="../4" type="button">
+    Tilbage
+  </button>
+  <button mat-raised-button routerLink="thanks">
+    Send resultater
+  </button>
+</form>
