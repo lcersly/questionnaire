@@ -13,20 +13,17 @@ export class QuestionService {
   private currentPosition = new ReplaySubject<{ name: PositionType, index?: number, question?: Question }>();
   public currentPosition$ = this.currentPosition.asObservable();
   public currentQuestion$ = this.currentPosition.pipe(map(pos => pos.question), shareReplay(1));
-  public currentAnswerOptions$ = this.currentQuestion$.pipe(map(question => question?.answers), shareReplay(1));
-  public currentQuestionHeader$ = this.currentQuestion$.pipe(map(question => question?.question), shareReplay(1));
-  public currentQuestionOptions$ = this.currentQuestion$.pipe(map(question => question?.options), shareReplay(1));
   public currentPositionType$ = this.currentPosition.pipe(map(pos => pos.name), shareReplay(1));
   public currentIndex$ = this.currentPosition.pipe(map(pos => pos.index), shareReplay(1));
 
   public answers$ = new BehaviorSubject<Answer[]>([]);
-
   public currentQuestionAnswer$ = combineLatest([this.currentIndex$, this.answers$]).pipe(
     map(([curIndex, answers]) => {
       if (curIndex == undefined) return undefined;
       return answers[curIndex];
     }),
-    shareReplay(1))
+    shareReplay(1)
+  );
   public currentQuestionHasNoAnswer$ = this.currentQuestionAnswer$.pipe(
     map(answer => {
       if (!answer) return undefined;

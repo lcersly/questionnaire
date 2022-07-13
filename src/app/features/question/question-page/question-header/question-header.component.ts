@@ -14,7 +14,7 @@ export class QuestionHeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.currentQuestionHeader$.subscribe(question => this.headerElements = question)
+    this.questionService.currentQuestion$.subscribe(question => this.headerElements = question?.question);
   }
 
 }

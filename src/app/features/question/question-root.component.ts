@@ -43,9 +43,9 @@ export class QuestionRootComponent implements OnInit {
     this.questionService.setQuestionnaireLength(4);
 
     if (!this.isProduction) {
-      this.questionService.currentQuestionOptions$.subscribe(options => {
-        if (options) {
-          this.correctAnswer = options.correctIndex.map(value => value + 1)
+      this.questionService.currentQuestion$.subscribe(question => {
+        if (question?.options) {
+          this.correctAnswer = question.options.correctIndex.map(value => value + 1)
         } else {
           this.correctAnswer = undefined;
         }

@@ -16,7 +16,7 @@ export class QuestionAnswersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.currentAnswerOptions$.subscribe(question => this.answers = question)
+    this.questionService.currentQuestion$.subscribe(question => this.answers = question?.answers);
     this.questionService.currentQuestionAnswer$.subscribe(currentAnswer => {
       if (currentAnswer && currentAnswer.index != undefined) {
         // console.info("Updating form value from previous", currentAnswer);
