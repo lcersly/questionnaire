@@ -8,12 +8,12 @@
     ],
     "rewrites": [
       {
-        "source": "/da-DK/{,/**}",
-        "destination": "/da-DK/index.html"
+        "source": "/da/{,/**}",
+        "destination": "/da/index.html"
       },
       {
-        "source": "/en-US/{,/**}",
-        "destination": "/en-US/index.html"
+        "source": "/en/{,/**}",
+        "destination": "/en/index.html"
       }
     ],
     "i18n": {
