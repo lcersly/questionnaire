@@ -13,7 +13,7 @@ export class Page1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion(0, QuestionsREST["idempotent-method"])
+    this.questionService.setCurrentPosition('question', 0, QuestionsREST["idempotent-method"])
 
     this.navService.setBoth(
       {link: 'start', text: 'Tilbage til start'},

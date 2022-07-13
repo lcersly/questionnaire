@@ -13,9 +13,10 @@ export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
     navn: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    mobile: new FormControl('', [Validators.required]),
   })
 
-  constructor(private navService: NavigationService, private questionService: QuestionService, private router: Router, private route: ActivatedRoute) {
+  constructor(private navService: NavigationService, public questionService: QuestionService, private router: Router, private route: ActivatedRoute) {
   }
 
   get emailControl() {
@@ -26,24 +27,33 @@ export class PageSubmitComponent implements OnInit {
     return this.form.get('navn') as FormControl
   }
 
+  get mobileControl() {
+    return this.form.get('mobile') as FormControl
+  }
+
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion();
+    this.questionService.setCurrentPosition('submit');
     this.navService.setBoth();
     const storedPerson = localStorage.getItem('person');
     if (storedPerson) {
-      this.form.setValue(JSON.parse(storedPerson));
+      this.form.patchValue(JSON.parse(storedPerson));
     }
     this.form.valueChanges.subscribe(() => localStorage.setItem("person", JSON.stringify(this.form.value)))
   }
 
   submit() {
     this.form.markAllAsTouched();
-    if (!this.form.valid) {
+    if (this.form.invalid) {
       return;
     }
 
     localStorage.clear();
 
     this.router.navigate(['..', 'thanks'], {relativeTo: this.route});
+  }
+
+  startOver() {
+    this.questionService.resetQuestionnaire();
+    this.router.navigate(['..', 'start'], {relativeTo: this.route});
   }
 }

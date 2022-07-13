@@ -14,7 +14,7 @@ export class Page3Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion(2, QuestionsCode["referential-transparent"]);
+    this.questionService.setCurrentPosition('question', 2, QuestionsCode["referential-transparent"]);
 
     this.navService.setBoth(
       {link: '2', text: 'Tilbage'},

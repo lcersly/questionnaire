@@ -9,13 +9,13 @@ import {NavigationService} from "../../../services/navigation.service";
 })
 export class PageStartComponent implements OnInit {
 
-  constructor(private navService: NavigationService, private questionService: QuestionService) {
+  constructor(private navService: NavigationService, public questionService: QuestionService) {
   }
 
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion();
+    this.questionService.setCurrentPosition('start');
 
-    this.navService.setBoth(undefined, {text: 'Next', link: '1', enableWithoutAnswer: true});
+    this.navService.setBoth(undefined, {text: 'Start', link: '1', enableWithoutAnswer: true});
   }
 
 }

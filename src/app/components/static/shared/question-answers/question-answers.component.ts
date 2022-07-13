@@ -17,13 +17,15 @@ export class QuestionAnswersComponent implements OnInit {
 
   ngOnInit(): void {
     this.questionService.currentAnswerOptions$.subscribe(question => this.answers = question)
-    this.questionService.currentQuestionAnswer$.subscribe(selected => this.form.setValue(selected, {emitEvent: false}));
-    this.form.valueChanges.subscribe(() => this.change());
-  }
-
-  change() {
-    console.info(this.form);
-    let value = this.form.value;
-    this.questionService.registerAnswer(value)
+    this.questionService.currentQuestionAnswer$.subscribe(currentAnswer => {
+      if (currentAnswer && currentAnswer.index != undefined) {
+        // console.info("Updating form value from previous", currentAnswer);
+        this.form.setValue(currentAnswer?.index, {emitEvent: false});
+      } else {
+        // console.info("Resetting form", currentAnswer);
+        this.form.reset(null, {emitEvent: false});
+      }
+    });
+    this.form.valueChanges.subscribe(() => this.questionService.registerAnswer(this.form.value));
   }
 }

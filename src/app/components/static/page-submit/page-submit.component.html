@@ -1,27 +1,45 @@
-<form (ngSubmit)="submit()">
-  <mat-form-field appearance="fill">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput [formControl]="emailControl" placeholder="Ex. pat@example.com">
-    <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
-      Udfyld en gyldig email adresse
-    </mat-error>
-    <mat-error *ngIf="emailControl.hasError('required')">
-      Email er <strong>krævet</strong>
-    </mat-error>
-  </mat-form-field>
+<ng-container *ngIf="questionService.isAllAnswersCorrect(); else wrongAnswers">
+  <p>Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.</p>
+  <p>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</p>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Navn</mat-label>
-    <input type="text" matInput [formControl]="nameControl">
-    <mat-error *ngIf="nameControl.hasError('required')">
-      Navn er <strong>krævet</strong>
-    </mat-error>
-  </mat-form-field>
+  <form (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+        Udfyld en gyldig email adresse
+      </mat-error>
+      <mat-error *ngIf="emailControl.hasError('required')">
+        Email er <strong>krævet</strong>
+      </mat-error>
+    </mat-form-field>
 
-  <button mat-raised-button routerLink="../4" type="button">
-    Tilbage
-  </button>
-  <button mat-raised-button routerLink="thanks">
-    Send resultater
-  </button>
-</form>
+    <mat-form-field appearance="fill">
+      <mat-label>Navn</mat-label>
+      <input type="text" matInput [formControl]="nameControl">
+      <mat-error *ngIf="nameControl.hasError('required')">
+        Navn er <strong>krævet</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Mobil nummer</mat-label>
+      <input type="tel" matInput [formControl]="mobileControl">
+      <mat-error *ngIf="mobileControl.hasError('required')">
+        Mobil nummer er <strong>krævet</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button routerLink="../4" type="button">
+      Tilbage
+    </button>
+    <button mat-raised-button>
+      Send resultater
+    </button>
+  </form>
+</ng-container>
+
+<ng-template #wrongAnswers>
+  <p>Du fik kun {{questionService.correctAnswers()}} / {{questionService.totalAnswers()}} rigtige.</p>
+  <button mat-raised-button (click)="startOver()">Prøv igen</button>
+</ng-template>

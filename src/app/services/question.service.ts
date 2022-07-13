@@ -1,52 +1,119 @@
 import {Injectable} from '@angular/core';
 import {Question} from "../models/question.model";
-import {BehaviorSubject, combineLatest, map} from "rxjs";
+import {BehaviorSubject, combineLatest, first, map, ReplaySubject, shareReplay} from "rxjs";
+
+type Answer = { index?: number | number[], correct: boolean };
+
+type PositionType = 'start' | 'question' | 'end' | 'submit' | undefined;
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuestionService {
-  private currentQuestion = new BehaviorSubject<Question | undefined>(undefined);
-  public currentQuestion$ = this.currentQuestion.asObservable();
-  public currentAnswerOptions$ = this.currentQuestion$.pipe(map(question => question?.answers));
-  public currentQuestionHeader$ = this.currentQuestion$.pipe(map(question => question?.question));
-  public currentQuestionOptions$ = this.currentQuestion$.pipe(map(question => question?.options));
-  public currentIndex$ = new BehaviorSubject<number | undefined>(undefined);
-  public answers$ = new BehaviorSubject<number[]>([]);
-  public currentQuestionAnswer$ = combineLatest([this.currentIndex$, this.answers$]).pipe(map(([curIndex, answers]) => {
-    if (curIndex == undefined) return undefined;
-    return answers[curIndex];
-  }))
-  public currentQuestionHasAnswer$ = this.currentQuestionAnswer$.pipe(map(answer => answer != undefined));
-  public currentQuestionHasNoAnswer$ = this.currentQuestionAnswer$.pipe(map(answer => answer == undefined));
+  private currentPosition = new ReplaySubject<{ name: PositionType, index?: number, question?: Question }>();
+  public currentQuestion$ = this.currentPosition.pipe(map(pos => pos.question), shareReplay(1));
+  public currentAnswerOptions$ = this.currentQuestion$.pipe(map(question => question?.answers), shareReplay(1));
+  public currentQuestionHeader$ = this.currentQuestion$.pipe(map(question => question?.question), shareReplay(1));
+  public currentPositionType$ = this.currentPosition.pipe(map(pos => pos.name), shareReplay(1));
+  public currentIndex$ = this.currentPosition.pipe(map(pos => pos.index), shareReplay(1));
+
+  public answers$ = new BehaviorSubject<Answer[]>([]);
+
+  public currentQuestionAnswer$ = combineLatest([this.currentIndex$, this.answers$]).pipe(
+    map(([curIndex, answers]) => {
+      console.info("Current index and answer", curIndex, curIndex ? answers[curIndex] : null)
+      if (curIndex == undefined) return undefined;
+      return answers[curIndex];
+    }),
+    shareReplay(1))
+  public currentQuestionHasNoAnswer$ = this.currentQuestionAnswer$.pipe(
+    map(answer => {
+      if (!answer) return undefined;
+      return answer.index == undefined;
+    }),
+    shareReplay(1)
+  );
+
+  private questionnaireLength = 0;
 
   constructor() {
   }
 
-  setQuestionnaireLength(length: number) {
-    const oldAnswers = JSON.parse(localStorage.getItem("answers") || '[]') as number[];
-    if (oldAnswers?.length == length) {
-      this.answers$.next(oldAnswers);
-    } else {
-      this.answers$.next(new Array(length).fill(null));
+  public setQuestionnaireLength(length: number) {
+    this.questionnaireLength = length;
+
+    const oldRawAnswers = localStorage.getItem("answers");
+    if (oldRawAnswers) {
+      const oldAnswers = JSON.parse(oldRawAnswers);
+      if (oldAnswers?.length == this.questionnaireLength) {
+        this.answers$.next(oldAnswers);
+        return;
+      }
     }
+    this.resetQuestionnaire();
   }
 
-  setCurrentQuestion(index?: number, question?: Question) {
-    this.currentIndex$.next(index);
-    this.currentQuestion.next(question);
+  public resetQuestionnaire() {
+    const value = new Array(this.questionnaireLength).fill({index: undefined, correct: false});
+    console.info("Resetting questionnaire to", value);
+    this.answers$.next(value);
   }
 
-  registerAnswer(value: number) {
-    let answers = this.answers$.getValue();
-    let index = this.currentIndex$.value;
-    if (!answers || index == undefined) {
-      console.error("Index or answers undefined", answers, index);
-      return;
+  public setCurrentPosition(name: 'start' | 'question' | 'end' | 'submit', index?: number, question?: Question) {
+    this.currentPosition.next({name, index, question})
+  }
+
+  public isAllAnswersCorrect() {
+    return this.correctAnswers() == this.totalAnswers();
+  }
+
+  public isAnyAnswerIncorrect() {
+    return this.incorrectAnswers() > 0;
+  }
+
+  public incorrectAnswers() {
+    return this.answers$.getValue().reduce((prev, current) => !current.correct ? prev + 1 : prev, 0)
+  }
+
+
+  public correctAnswers() {
+    return this.answers$.getValue().reduce((prev, current) => current.correct ? prev + 1 : prev, 0)
+  }
+
+  public totalAnswers() {
+    return this.answers$.getValue().length;
+  }
+
+  public registerAnswer(value: number | number[]) {
+    return combineLatest([this.currentPosition, this.answers$])
+      .pipe(first())
+      .subscribe(([pos, answers]) => {
+        const index = pos.index;
+        const question = pos.question;
+        if (!answers || index == undefined || !question) {
+          console.error("Index, answers or question undefined", answers, index, question);
+          return;
+        }
+        const answer = answers[index];
+        answer.index = value;
+        answer.correct = QuestionService.isAnswerCorrect(question, value);
+        console.info("Registering for question index " + index, answer)
+        this.answers$.next(answers);
+        localStorage.setItem("answers", JSON.stringify(answers));
+      })
+  }
+
+  private static isAnswerCorrect(question: Question, answer: number | number[]): boolean {
+    if (Array.isArray(answer)) {
+      for (const number of answer) {
+        if (!question.options.correctIndex.includes(number)) {
+          return false;
+        }
+      }
+      return true;
     }
-    answers[index] = value;
-    this.answers$.next(answers);
-    localStorage.setItem("answers", JSON.stringify(answers));
+
+    return question.options.correctIndex.includes(answer)
   }
 
 }

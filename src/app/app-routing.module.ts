@@ -15,7 +15,7 @@ import {PageStartComponent} from "./components/static/page-start/page-start.comp
 import {PageThanksComponent} from "./components/static/page-thanks/page-thanks.component";
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/static'},
+  {path: '', pathMatch: 'full', redirectTo: 'static'},
   {path: 'list', component: FlowListComponent},
   {
     path: 'static', component: StaticRootComponent, children: [
@@ -30,7 +30,8 @@ const routes: Routes = [
     ]
   },
   {
-    path: ':flow-id', component: FlowRootComponent, children: [
+    path: 'flow/:flow-id', component: FlowRootComponent, children: [
+      {path: '', pathMatch: 'full', redirectTo: 'start'},
       {path: 'start', component: StartFlowComponent},
       {path: 'end', component: EndFlowComponent},
       {path: ':question-id', component: QuestionPageComponent},

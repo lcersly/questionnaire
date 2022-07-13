@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <img src="assets/bankdata-logo-green.png" height="177" alt="Bankdata logo">
+</mat-toolbar>
+
+<mat-progress-bar mode="determinate"
+                  *ngIf="showProgressBar | async"
+                  [value]="currentProgress | async"
+                  color="primary"
+></mat-progress-bar>

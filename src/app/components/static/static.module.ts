@@ -17,6 +17,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {PageThanksComponent} from './page-thanks/page-thanks.component';
+import {HeaderComponent} from './shared/header/header.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 
 @NgModule({
@@ -31,7 +34,8 @@ import {PageThanksComponent} from './page-thanks/page-thanks.component';
     PageStartComponent,
     QuestionHeaderComponent,
     QuestionAnswersComponent,
-    PageThanksComponent
+    PageThanksComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -41,7 +45,9 @@ import {PageThanksComponent} from './page-thanks/page-thanks.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule,
+    MatProgressBarModule
   ]
 })
 export class StaticModule {

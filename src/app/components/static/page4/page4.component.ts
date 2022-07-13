@@ -14,7 +14,7 @@ export class Page4Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion(3, QuestionsCode["addition-of-numbers"]);
+    this.questionService.setCurrentPosition('question', 3, QuestionsCode["addition-of-numbers"]);
 
     this.navService.setBoth(
       {link: '3', text: 'Tilbage'},

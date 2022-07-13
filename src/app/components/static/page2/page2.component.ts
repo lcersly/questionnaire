@@ -14,7 +14,7 @@ export class Page2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.questionService.setCurrentQuestion(1, QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"]);
+    this.questionService.setCurrentPosition('question', 1, QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"]);
 
     this.navService.setBoth(
       {link: '1', text: 'Tilbage'},
