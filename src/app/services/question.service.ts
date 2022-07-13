@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Question} from "../models/question.model";
 import {BehaviorSubject, combineLatest, first, map, ReplaySubject, shareReplay} from "rxjs";
 
-type Answer = { index?: number | number[], correct: boolean };
+type Answer = { index: number | number[], correct: boolean };
 
 type PositionType = 'start' | 'question' | 'end' | 'submit' | undefined;
 
@@ -11,9 +11,11 @@ type PositionType = 'start' | 'question' | 'end' | 'submit' | undefined;
 })
 export class QuestionService {
   private currentPosition = new ReplaySubject<{ name: PositionType, index?: number, question?: Question }>();
+  public currentPosition$ = this.currentPosition.asObservable();
   public currentQuestion$ = this.currentPosition.pipe(map(pos => pos.question), shareReplay(1));
   public currentAnswerOptions$ = this.currentQuestion$.pipe(map(question => question?.answers), shareReplay(1));
   public currentQuestionHeader$ = this.currentQuestion$.pipe(map(question => question?.question), shareReplay(1));
+  public currentQuestionOptions$ = this.currentQuestion$.pipe(map(question => question?.options), shareReplay(1));
   public currentPositionType$ = this.currentPosition.pipe(map(pos => pos.name), shareReplay(1));
   public currentIndex$ = this.currentPosition.pipe(map(pos => pos.index), shareReplay(1));
 
@@ -21,7 +23,6 @@ export class QuestionService {
 
   public currentQuestionAnswer$ = combineLatest([this.currentIndex$, this.answers$]).pipe(
     map(([curIndex, answers]) => {
-      console.info("Current index and answer", curIndex, curIndex ? answers[curIndex] : null)
       if (curIndex == undefined) return undefined;
       return answers[curIndex];
     }),
@@ -29,7 +30,7 @@ export class QuestionService {
   public currentQuestionHasNoAnswer$ = this.currentQuestionAnswer$.pipe(
     map(answer => {
       if (!answer) return undefined;
-      return answer.index == undefined;
+      return answer.index === -1;
     }),
     shareReplay(1)
   );
@@ -37,6 +38,7 @@ export class QuestionService {
   private questionnaireLength = 0;
 
   constructor() {
+    this.answers$.subscribe(answers => console.info("Answers updated", answers));
   }
 
   public setQuestionnaireLength(length: number) {
@@ -46,6 +48,7 @@ export class QuestionService {
     if (oldRawAnswers) {
       const oldAnswers = JSON.parse(oldRawAnswers);
       if (oldAnswers?.length == this.questionnaireLength) {
+        console.debug("Using old answers for initialize with", oldAnswers);
         this.answers$.next(oldAnswers);
         return;
       }
@@ -54,9 +57,15 @@ export class QuestionService {
   }
 
   public resetQuestionnaire() {
-    const value = new Array(this.questionnaireLength).fill({index: undefined, correct: false});
-    console.info("Resetting questionnaire to", value);
-    this.answers$.next(value);
+    localStorage.removeItem('answers');
+
+    const values = [];
+    for (let i = 0; i < this.questionnaireLength; i++) {
+      values.push({correct: false, index: -1})
+    }
+    // console.debug("Resetting questionnaire to", values);
+
+    this.answers$.next(values);
   }
 
   public setCurrentPosition(name: 'start' | 'question' | 'end' | 'submit', index?: number, question?: Question) {
@@ -94,11 +103,11 @@ export class QuestionService {
           console.error("Index, answers or question undefined", answers, index, question);
           return;
         }
-        const answer = answers[index];
+        const answer: Answer = answers[index];
         answer.index = value;
         answer.correct = QuestionService.isAnswerCorrect(question, value);
-        console.info("Registering for question index " + index, answer)
-        this.answers$.next(answers);
+        this.answers$.next([...answers]);
+
         localStorage.setItem("answers", JSON.stringify(answers));
       })
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../../../../services/question.service";
-import {combineLatest, map, of} from "rxjs";
+import {combineLatest, map, Observable, of} from "rxjs";
+import {ThemePalette} from "@angular/material/core";
 
 @Component({
   selector: 'app-header',
@@ -43,6 +44,12 @@ export class HeaderComponent implements OnInit {
         return 100 * index! / answers.length
       })
     )
+  }
+
+  get progressColor(): Observable<ThemePalette> {
+    return this.answerService.currentPosition$.pipe(map(pos => {
+      return pos.name === 'submit' && this.answerService.isAnyAnswerIncorrect() ? 'warn' : 'primary';
+    }))
   }
 
 }

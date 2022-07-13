@@ -7,7 +7,7 @@
 <button *ngIf="next"
         [routerLink]="next.link"
         mat-raised-button
-        [disabled]="!next.enableWithoutAnswer && (questionService.currentQuestionHasNoAnswer$ | async)"
+        [disabled]="!next?.enableWithoutAnswer && (questionService.currentQuestionHasNoAnswer$ | async)"
 >
   {{next.text}}
 </button>

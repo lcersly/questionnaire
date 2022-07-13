@@ -6,5 +6,7 @@
 
 <app-navigation-buttons></app-navigation-buttons>
 
-
-<!--<button mat-flat-button color="warn" (click)="startOver()" id="start-over">Start over</button>-->
+<div id="debugOptions" *ngIf="!isProduction">
+  <button mat-flat-button color="warn" (click)="startOver()">Start over</button>
+  <span *ngIf="correctAnswer">The correct answer is {{correctAnswer}}</span>
+</div>

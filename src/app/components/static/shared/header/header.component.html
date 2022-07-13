@@ -5,5 +5,5 @@
 <mat-progress-bar mode="determinate"
                   *ngIf="showProgressBar | async"
                   [value]="currentProgress | async"
-                  color="primary"
+                  [color]="progressColor | async"
 ></mat-progress-bar>
