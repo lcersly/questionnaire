@@ -38,7 +38,7 @@ export class QuestionService {
   private questionnaireLength = 0;
 
   constructor() {
-    this.answers$.subscribe(answers => console.info("Answers updated", answers));
+    // this.answers$.subscribe(answers => console.info("Answers updated", answers));
   }
 
   public setQuestionnaireLength(length: number) {

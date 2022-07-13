@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionService} from "../../../services/question.service";
-import {NavigationService} from "../../../services/navigation.service";
+import {QuestionService} from "../../../../services/question.service";
+import {NavigationService} from "../../../../services/navigation.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 
