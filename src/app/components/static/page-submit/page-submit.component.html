@@ -1,12 +1,12 @@
 <ng-container *ngIf="questionService.isAllAnswersCorrect(); else wrongAnswers">
-  <p>Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.</p>
-  <p>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</p>
+  <p i18n>Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.</p>
+  <p i18n>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</p>
 
   <form (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
+      <mat-label i18n>Email</mat-label>
       <input type="email" matInput [formControl]="emailControl" placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+      <mat-error i18n *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
         Udfyld en gyldig email adresse
       </mat-error>
       <mat-error *ngIf="emailControl.hasError('required')">

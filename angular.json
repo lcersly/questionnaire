@@ -4,6 +4,15 @@
   "newProjectRoot": "projects",
   "projects": {
     "RecruitmentQuiz": {
+      "i18n": {
+        "sourceLocale": "da",
+        "locales": {
+          "en": {
+            "translation": "src/locale/messages.en.xlf",
+            "baseHref": "en"
+          }
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,6 +26,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": [
+              "en"
+            ],
             "outputPath": "dist/recruitment-quiz",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -53,9 +65,36 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "fonts": false,
+                "scripts": true,
+                "styles": true
+              }
             },
             "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "en": {
+              "localize": [
+                "en"
+              ],
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "da": {
+              "localize": [
+                "da"
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -74,6 +113,12 @@
             },
             "development": {
               "browserTarget": "RecruitmentQuiz:build:development"
+            },
+            "en": {
+              "browserTarget": "RecruitmentQuiz:build:en"
+            },
+            "da": {
+              "browserTarget": "RecruitmentQuiz:build:da"
             }
           },
           "defaultConfiguration": "development"

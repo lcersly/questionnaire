@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="da-DK" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="7067300710137828870" datatype="html">
+        <source>Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/page-submit/page-submit.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5200035330209553053" datatype="html">
+        <source>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/page-submit/page-submit.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/page-submit/page-submit.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7551019287897722688" datatype="html">
+        <source>Udfyld en gyldig email adresse</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/page-submit/page-submit.component.html</context>
+          <context context-type="linenumber">9,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8445227771044201652" datatype="html">
+        <source>Tak for din deltagelse. Vi kontakter dig via SMS hvis du bliver udtrukket.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/page-thanks/page-thanks.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7277309671204858709" datatype="html">
+        <source>Bankdata logo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/static/shared/header/header.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

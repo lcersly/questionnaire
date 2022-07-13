@@ -8,10 +8,17 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/da-DK/{,/**}",
+        "destination": "/da-DK/index.html"
+      },
+      {
+        "source": "/en-US/{,/**}",
+        "destination": "/en-US/index.html"
       }
-    ]
+    ],
+    "i18n": {
+      "root": "/"
+    }
   },
   "functions": {
     "predeploy": [
