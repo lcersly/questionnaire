@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {StaticModule} from "./components/static/static.module";
+import {QuestionModule} from "./features/question/question.module";
 
 @NgModule({
   declarations: [
@@ -13,7 +13,7 @@ import {StaticModule} from "./components/static/static.module";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StaticModule,
+    QuestionModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

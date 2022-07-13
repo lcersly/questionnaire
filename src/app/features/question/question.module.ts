@@ -2,12 +2,12 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NavigationButtonsComponent} from './shared/navigation-buttons/navigation-buttons.component';
 import {PageSubmitComponent} from './special-pages/page-submit/page-submit.component';
-import {StaticRootComponent} from './static-root.component';
+import {QuestionRootComponent} from './question-root.component';
 import {PageStartComponent} from './special-pages/page-start/page-start.component';
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
-import {QuestionHeaderComponent} from './shared/question-header/question-header.component';
-import {QuestionAnswersComponent} from './shared/question-answers/question-answers.component';
+import {QuestionHeaderComponent} from './question-page/question-header/question-header.component';
+import {QuestionAnswersComponent} from './question-page/question-answers/question-answers.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -23,7 +23,7 @@ import {QuestionPageComponent} from "./question-page/question-page.component";
   declarations: [
     NavigationButtonsComponent,
     PageSubmitComponent,
-    StaticRootComponent,
+    QuestionRootComponent,
     PageStartComponent,
     QuestionHeaderComponent,
     QuestionAnswersComponent,
@@ -44,5 +44,5 @@ import {QuestionPageComponent} from "./question-page/question-page.component";
     MatProgressBarModule
   ]
 })
-export class StaticModule {
+export class QuestionModule {
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {QuestionService} from "../../../../services/question.service";
-import {PageElement} from "../../../../models/page-element.model";
 import {FormControl} from "@angular/forms";
+import {PageElement} from "../../../../models/page-element.model";
+import {QuestionService} from "../../../../services/question.service";
 
 @Component({
   selector: 'app-question-answers',

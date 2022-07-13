@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ReplaySubject} from "rxjs";
-import {NavigationButton} from "../components/static/shared/navigation-buttons/navigation-buttons.component";
+import {NavigationButton} from "../features/question/shared/navigation-buttons/navigation-buttons.component";
 
 @Injectable({
   providedIn: 'root'

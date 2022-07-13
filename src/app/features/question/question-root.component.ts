@@ -7,6 +7,7 @@ import {environment} from "../../../environments/environment";
 @Component({
   selector: 'app-static-root',
   template: `
+    <app-header></app-header>
     <router-outlet></router-outlet>
     <div id="debugOptions" *ngIf="!isProduction">
       <h4>Debug options</h4>
@@ -27,7 +28,7 @@ import {environment} from "../../../environments/environment";
     `
   ]
 })
-export class StaticRootComponent implements OnInit {
+export class QuestionRootComponent implements OnInit {
   isProduction = environment.production;
   correctAnswer: number[] | undefined;
 

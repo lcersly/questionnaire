@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {QuestionsSprint} from "../../../services/questions/sprint";
+import {NavigationButton} from "../shared/navigation-buttons/navigation-buttons.component";
 import {NavigationService} from "../../../services/navigation.service";
 import {QuestionService} from "../../../services/question.service";
-import {QuestionsREST} from "../../../services/questions/rest";
-import {QuestionsCode} from "../../../services/questions/code";
 import {Question} from "../../../models/question.model";
-import {NavigationButton} from "../shared/navigation-buttons/navigation-buttons.component";
+import {QuestionsREST} from "../../../services/questions/rest";
+import {QuestionsSprint} from "../../../services/questions/sprint";
+import {QuestionsCode} from "../../../services/questions/code";
 
 @Component({
   selector: 'app-question-page',
