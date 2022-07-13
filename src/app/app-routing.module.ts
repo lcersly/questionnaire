@@ -7,6 +7,7 @@ import {PageThanksComponent} from "./features/question/special-pages/page-thanks
 import {QuestionPageComponent} from "./features/question/question-page/question-page.component";
 
 const routes: Routes = [
+  {path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)},
   {
     path: '', component: QuestionRootComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'start'},
