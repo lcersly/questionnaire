@@ -1,0 +1,8 @@
+<mat-radio-group [formControl]="form">
+  <mat-radio-button *ngFor="let element of answers; let i = index" [value]="i" color="primary">
+    <ng-container [ngSwitch]="element.type">
+      <app-code-answer-option *ngSwitchCase="'code'" [element]="element"></app-code-answer-option>
+      <ng-container *ngSwitchDefault>{{element.content}}</ng-container>
+    </ng-container>
+  </mat-radio-button>
+</mat-radio-group>

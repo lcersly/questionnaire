@@ -3,11 +3,11 @@ import {PageElement} from "../../../../models/page-element.model";
 import {QuestionService} from "../../../../services/question.service";
 
 @Component({
-  selector: 'app-question-header',
-  templateUrl: './question-header.component.html',
-  styleUrls: ['./question-header.component.scss']
+  selector: 'app-question-text',
+  templateUrl: './question-text.component.html',
+  styleUrls: ['./question-text.component.scss']
 })
-export class QuestionHeaderComponent implements OnInit {
+export class QuestionTextComponent implements OnInit {
   public headerElements: PageElement[] | undefined;
 
   constructor(private questionService: QuestionService) {

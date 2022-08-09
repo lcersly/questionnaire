@@ -6,8 +6,10 @@ import {QuestionRootComponent} from './question-root.component';
 import {PageStartComponent} from './special-pages/page-start/page-start.component';
 import {RouterModule} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
-import {QuestionHeaderComponent} from './question-page/question-header/question-header.component';
-import {QuestionAnswersComponent} from './question-page/question-answers/question-answers.component';
+import {QuestionTextComponent} from './question-page/question-text/question-text.component';
+import {
+  QuestionAnswerOptionsComponent
+} from './question-page/question-answer-options/question-answer-options.component';
 import {MatRadioModule} from "@angular/material/radio";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -17,6 +19,8 @@ import {HeaderComponent} from './shared/header/header.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {QuestionPageComponent} from "./question-page/question-page.component";
+import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
+import {CodePageElementComponent} from './shared/code-page-element/code-page-element.component';
 
 
 @NgModule({
@@ -25,11 +29,12 @@ import {QuestionPageComponent} from "./question-page/question-page.component";
     PageSubmitComponent,
     QuestionRootComponent,
     PageStartComponent,
-    QuestionHeaderComponent,
-    QuestionAnswersComponent,
+    QuestionTextComponent,
+    QuestionAnswerOptionsComponent,
     PageThanksComponent,
     HeaderComponent,
     QuestionPageComponent,
+    CodePageElementComponent,
   ],
   imports: [
     CommonModule,
@@ -41,8 +46,23 @@ import {QuestionPageComponent} from "./question-page/question-page.component";
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
-    MatProgressBarModule
-  ]
+    MatProgressBarModule,
+    HighlightModule
+  ],
+  providers: [{
+    provide: HIGHLIGHT_OPTIONS,
+    useValue: {
+      coreLibraryLoader: () => import('highlight.js/lib/core'),
+      languages: {
+        typescript: () => import('highlight.js/lib/languages/typescript'),
+        javascript: () => import('highlight.js/lib/languages/javascript'),
+        scala: () => import('highlight.js/lib/languages/scala'),
+        java: () => import('highlight.js/lib/languages/java'),
+        // css: () => import('highlight.js/lib/languages/css'),
+        // xml: () => import('highlight.js/lib/languages/xml')
+      },
+    }
+  }],
 })
 export class QuestionModule {
 }
