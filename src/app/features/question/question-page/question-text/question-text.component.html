@@ -1,0 +1,6 @@
+<div *ngFor="let element of headerElements">
+  <ng-container [ngSwitch]="element.type">
+    <app-code-answer-option *ngSwitchCase="'code'" [element]="element"></app-code-answer-option>
+    <ng-container *ngSwitchDefault>{{element.content}}</ng-container>
+  </ng-container>
+</div>
