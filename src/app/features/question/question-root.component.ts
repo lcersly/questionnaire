@@ -6,27 +6,8 @@ import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-static-root',
-  template: `
-    <app-header></app-header>
-    <router-outlet></router-outlet>
-    <div id="debugOptions" *ngIf="!isProduction">
-      <h4>Debug options</h4>
-      <button mat-flat-button color="warn" (click)="startOver()">Start over</button>
-      <span *ngIf="correctAnswer">The correct answer is {{correctAnswer}}</span>
-    </div>
-  `,
-  styles: [
-    `
-      #debugOptions {
-        position: absolute;
-        left: 10px;
-        bottom: 10px;
-
-        padding: 10px;
-        border: 1px black solid;
-      }
-    `
-  ]
+  templateUrl: 'question-root.component.html',
+  styleUrls: ['question-root.component.scss']
 })
 export class QuestionRootComponent implements OnInit {
   isProduction = environment.production;

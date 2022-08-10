@@ -1,0 +1,15 @@
+//:host{
+//  display: flex;
+//  flex-direction: column;
+//  height: 100%;
+//  overflow: auto;
+//}
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+app-question-answers {
+  overflow: auto;
+}

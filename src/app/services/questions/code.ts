@@ -46,7 +46,9 @@ export const QuestionsCode = {
   {
     x+=j;
   }
-  return x + Integer.valueOf(System.getenv("environment_integer"));
+  return x + Integer.valueOf(
+    System.getenv("environment_integer")
+  );
 }`,
         languageHighlighting: 'java'
       },
@@ -62,7 +64,8 @@ export const QuestionsCode = {
       },
       {
         type: 'code',
-        content: 'def add() = (1 to scala.io.StdIn.readInt()).map(x => x+1*3);',
+        content: `def add() = (1 to scala.io.StdIn.readInt())
+              .map(x => x+1*3);`,
         languageHighlighting: 'scala'
       }
     ],
