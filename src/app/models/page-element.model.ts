@@ -3,7 +3,7 @@ export type PageElement = CodeElement | SimpleTextElement;
 export interface CodeElement {
   readonly type: 'code'
   readonly content: string
-  readonly highlighting: string;
+  readonly languageHighlighting: string;
 }
 
 export interface SimpleTextElement {

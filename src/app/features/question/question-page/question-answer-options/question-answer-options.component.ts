@@ -5,10 +5,10 @@ import {QuestionService} from "../../../../services/question.service";
 
 @Component({
   selector: 'app-question-answers',
-  templateUrl: './question-answers.component.html',
-  styleUrls: ['./question-answers.component.scss']
+  templateUrl: './question-answer-options.component.html',
+  styleUrls: ['./question-answer-options.component.scss']
 })
-export class QuestionAnswersComponent implements OnInit {
+export class QuestionAnswerOptionsComponent implements OnInit {
   public form = new FormControl();
   public answers: PageElement[] | undefined;
 
