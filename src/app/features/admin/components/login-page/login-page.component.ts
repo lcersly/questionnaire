@@ -1,4 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Optional} from '@angular/core';
+import {Auth, GoogleAuthProvider, signInWithPopup,} from '@angular/fire/auth';
+import {from} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -7,12 +10,16 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  // constructor(public auth: AngularFireAuth) { }
+  constructor(@Optional() private auth: Auth, private router: Router, private route: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
   }
 
   loginWithGoogle() {
-    // this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider()))
+      .subscribe(() =>
+        this.router.navigate(['..', 'answers'], {relativeTo: this.route})
+      );
   }
 }

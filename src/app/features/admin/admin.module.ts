@@ -5,6 +5,7 @@ import {AnswerListComponent} from './components/answer-list/answer-list.componen
 import {MatButtonModule} from "@angular/material/button";
 import {AdminRootComponent} from "./components/admin-root.component";
 import {AdminRoutingModule} from "./admin-routing.module";
+import {getAuth, provideAuth} from "@angular/fire/auth";
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {AdminRoutingModule} from "./admin-routing.module";
     MatButtonModule,
     AdminRoutingModule,
 
+    provideAuth(() => getAuth()),
   ]
 })
 export class AdminModule {
