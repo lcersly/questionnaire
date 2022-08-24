@@ -9,6 +9,7 @@ import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environment";
 import {connectAuthEmulator, getAuth, provideAuth} from "@angular/fire/auth";
 import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular
     provideAuth(() => {
       const auth = getAuth();
       if (environment.useEmulators) {
-        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+        connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
       }
       return auth;
     }),
@@ -37,6 +38,7 @@ import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular
     BrowserAnimationsModule,
     HttpClientModule,
     QuestionModule,
+    MatCardModule,
   ],
   providers: [
     // { provide: USE_DEVICE_LANGUAGE, useValue: true },
