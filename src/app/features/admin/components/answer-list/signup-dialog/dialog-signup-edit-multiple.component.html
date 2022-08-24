@@ -1,11 +1,14 @@
 <h1 mat-dialog-title>Modify {{data.links.length}} link(s)</h1>
 
 <div mat-dialog-content>
-  <pre>{{data.links | json}}</pre>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="warn">
+  <button mat-button (click)="setStatus(null)">Clear status</button>
+  <button mat-button (click)="setStatus('notified')">Mark notified</button>
+  <button mat-button (click)="setStatus('redeemed')">Mark redeemed</button>
+
+  <button mat-button (click)="deleteClick()" [color]="deleteColor">
     <mat-icon>delete</mat-icon>
   </button>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()">Cancel</button>
 </div>

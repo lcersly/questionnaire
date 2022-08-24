@@ -41,6 +41,7 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
       }
       this.dataSource.data = data;
       this.dataSource._updateChangeSubscription();
+      this.selection.clear();
     });
   }
 
@@ -92,10 +93,17 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
     const randomIndex = Math.floor(Math.random() * signups.length)
     const pick = signups[randomIndex];
 
-    this.dialog.open(DialogSignupPickedComponent, {data: {signup: pick} as DialogSignupPickedData, disableClose: true});
+    this.dialog.open(DialogSignupPickedComponent, {
+      data: {signup: pick} as DialogSignupPickedData,
+      disableClose: true,
+      autoFocus: false
+    });
   }
 
   editSelection() {
-    this.dialog.open(DialogSignupEditMultipleComponent, {data: {links: this.selection.selected} as DialogSignupEditMultipleData});
+    this.dialog.open(DialogSignupEditMultipleComponent, {
+      data: {links: this.selection.selected} as DialogSignupEditMultipleData,
+      autoFocus: false
+    });
   }
 }

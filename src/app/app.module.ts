@@ -7,8 +7,8 @@ import {QuestionModule} from "./features/question/question.module";
 import {HttpClientModule} from "@angular/common/http";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environment";
-import {getAuth, provideAuth} from "@angular/fire/auth";
-import {getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
+import {connectAuthEmulator, getAuth, provideAuth} from "@angular/fire/auth";
+import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
 
 @NgModule({
   declarations: [
@@ -17,8 +17,20 @@ import {getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
   imports: [
     // firebase init
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()), //uses lite version of firestore
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true });
+      }
+      return auth;
+    }),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      return firestore;
+    }), //uses lite version of firestore
 
     BrowserModule,
     AppRoutingModule,

@@ -56,7 +56,7 @@ export class PageSubmitComponent implements OnInit {
 
     this.firestoreService.sendSignup(this.form.value as SignupData)
       .subscribe((data) => {
-        console.info("Response from firebase", data);
+        //console.info("Response from firebase", data);
         localStorage.clear();
         this.router.navigate(['..', 'thanks'], {relativeTo: this.route});
       })

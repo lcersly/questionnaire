@@ -6,7 +6,7 @@ export interface SignupData {
   mobile: string
 }
 
-export type Status = 'pulled' | 'notified' | 'redeemed';
+export type Status = 'pulled' | 'notified' | 'redeemed' | null;
 
 export interface SignupFull extends SignupData {
   id?: string

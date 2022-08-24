@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {DocumentData, FirestoreDataConverter, QuerySnapshot} from 'firebase/firestore';
 import {SignupDatabase, SignupFull, Status} from "../../models/signup.model";
-import {collection, doc, Firestore, onSnapshot, Unsubscribe, updateDoc} from "@angular/fire/firestore";
+import {collection, doc, Firestore, onSnapshot, Unsubscribe, updateDoc, writeBatch} from "@angular/fire/firestore";
 import {from, map, ReplaySubject} from "rxjs";
 
 @Injectable({
@@ -39,11 +39,41 @@ export class SignupService {
     return collection(this.firestore, 'signups').withConverter(converter);
   }
 
+  getDoc(id: string) {
+    return doc(this.collection, id);
+  }
+
   setStatus(signup: SignupFull, status: Status) {
     if (!signup.id) {
       throw new Error("Signup has no ID");
     }
-    return from(updateDoc(doc(this.collection, signup.id), 'status', status));
+    return from(updateDoc(this.getDoc(signup.id), 'status', status));
+  }
+
+  setStatusMultiple(signups: SignupFull[], status: Status) {
+    if (signups.length > 500) throw new Error("To many documents");
+
+    let batch = writeBatch(this.firestore);
+    for (const signup of signups) {
+      if (!signup.id) {
+        throw new Error("Signup has no id");
+      }
+      batch.update(this.getDoc(signup.id), "status", status);
+    }
+    return from(batch.commit());
+  }
+
+  deleteMultiple(signups: SignupFull[]) {
+    if (signups.length > 500) throw new Error("To many documents");
+
+    let batch = writeBatch(this.firestore);
+    for (const signup of signups) {
+      if (!signup.id) {
+        throw new Error("Signup has no id");
+      }
+      batch.delete(this.getDoc(signup.id))
+    }
+    return from(batch.commit());
   }
 }
 
