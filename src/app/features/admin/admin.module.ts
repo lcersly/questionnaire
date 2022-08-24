@@ -5,11 +5,10 @@ import {AnswerListComponent} from './components/answer-list/answer-list.componen
 import {MatButtonModule} from "@angular/material/button";
 import {AdminRootComponent} from "./components/admin-root.component";
 import {AdminRoutingModule} from "./admin-routing.module";
-import {initializeFirestore, provideFirestore} from "@angular/fire/firestore";
+import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular/fire/firestore";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
-import {getApp} from "@angular/fire/app";
 import {MatIconModule} from "@angular/material/icon";
 import {SignupService} from "./signup.service";
 import {
@@ -20,6 +19,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {
   DialogSignupPickedComponent
 } from "./components/answer-list/signup-picked-dialog/dialog-signup-picked.component";
+import {environment} from "../../../environments/environment";
 
 
 @NgModule({
@@ -31,7 +31,13 @@ import {
     DialogSignupPickedComponent,
   ],
   imports: [
-    provideFirestore(() => initializeFirestore(getApp(), {experimentalForceLongPolling: true})),
+    provideFirestore(() => {
+      const firestore = getFirestore();
+      if (environment.useEmulators) {
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      }
+      return firestore
+    }),
     CommonModule,
     MatButtonModule,
     AdminRoutingModule,

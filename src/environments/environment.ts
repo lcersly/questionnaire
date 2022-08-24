@@ -12,7 +12,8 @@ export const environment = {
     messagingSenderId: "95548162383",
     appId: "1:95548162383:web:71f69abbeed10371b7c53a",
     measurementId: "G-VT1JP623MM"
-  }
+  },
+  useEmulators: true,
 };
 
 /*
