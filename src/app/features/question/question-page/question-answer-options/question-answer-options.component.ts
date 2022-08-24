@@ -18,9 +18,9 @@ export class QuestionAnswerOptionsComponent implements OnInit {
   ngOnInit(): void {
     this.questionService.currentQuestion$.subscribe(question => this.answers = question?.answers);
     this.questionService.currentQuestionAnswer$.subscribe(currentAnswer => {
-      if (currentAnswer && currentAnswer.index != undefined) {
+      if (currentAnswer && currentAnswer.answerIndex != undefined) {
         // console.info("Updating form value from previous", currentAnswer);
-        this.form.setValue(currentAnswer?.index, {emitEvent: false});
+        this.form.setValue(currentAnswer?.answerIndex, {emitEvent: false});
       } else {
         // console.info("Resetting form", currentAnswer);
         this.form.reset(null, {emitEvent: false});

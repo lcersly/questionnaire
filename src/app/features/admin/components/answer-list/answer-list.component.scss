@@ -1,0 +1,15 @@
+.spacer {
+  flex-grow: 1;
+}
+
+mat-table {
+  margin: 20px;
+
+  .mat-column-status {
+    flex: 0 0 30px;
+  }
+
+  .mat-column-select {
+    flex: 0 0 30px;
+  }
+}

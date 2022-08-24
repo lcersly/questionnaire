@@ -4,8 +4,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {QuestionModule} from "./features/question/question.module";
+import {HttpClientModule} from "@angular/common/http";
 import {initializeApp, provideFirebaseApp} from "@angular/fire/app";
 import {environment} from "../environments/environment";
+import {getAuth, provideAuth} from "@angular/fire/auth";
 import {getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
 
 @NgModule({
@@ -13,14 +15,16 @@ import {getFirestore, provideFirestore} from "@angular/fire/firestore/lite";
     AppComponent,
   ],
   imports: [
+    // firebase init
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()), //uses lite version of firestore
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     QuestionModule,
-
-    // firebase init
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
   ],
   providers: [
     // { provide: USE_DEVICE_LANGUAGE, useValue: true },

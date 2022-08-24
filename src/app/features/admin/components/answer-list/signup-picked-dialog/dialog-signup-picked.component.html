@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Random signup picked</h1>
+
+<div mat-dialog-content>
+  <p>
+    {{data.signup.name}}
+  </p>
+  <p>
+    <a [href]="'mailto:'+data.signup.email">{{data.signup.email}}</a>
+  </p>
+  <p>
+    <a [href]="'tel:'+data.signup.mobile">{{data.signup.mobile}}</a>
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-button (click)="markContacted()">
+    Mark contacted
+  </button>
+</div>

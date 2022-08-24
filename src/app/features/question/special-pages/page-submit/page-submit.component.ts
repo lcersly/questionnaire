@@ -3,6 +3,8 @@ import {QuestionService} from "../../../../services/question.service";
 import {NavigationService} from "../../../../services/navigation.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FirestoreService} from "../../../../services/firestore.service";
+import {SignupData} from "../../../../models/signup.model";
 
 @Component({
   selector: 'app-page-finish',
@@ -11,12 +13,17 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
-    navn: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     mobile: new FormControl('', [Validators.required]),
   })
 
-  constructor(private navService: NavigationService, public questionService: QuestionService, private router: Router, private route: ActivatedRoute) {
+  constructor(private navService: NavigationService,
+              public questionService: QuestionService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private firestoreService: FirestoreService
+  ) {
   }
 
   get emailControl() {
@@ -24,7 +31,7 @@ export class PageSubmitComponent implements OnInit {
   }
 
   get nameControl() {
-    return this.form.get('navn') as FormControl
+    return this.form.get('name') as FormControl
   }
 
   get mobileControl() {
@@ -47,9 +54,12 @@ export class PageSubmitComponent implements OnInit {
       return;
     }
 
-    localStorage.clear();
-
-    this.router.navigate(['..', 'thanks'], {relativeTo: this.route});
+    this.firestoreService.sendSignup(this.form.value as SignupData)
+      .subscribe((data) => {
+        console.info("Response from firebase", data);
+        localStorage.clear();
+        this.router.navigate(['..', 'thanks'], {relativeTo: this.route});
+      })
   }
 
   startOver() {

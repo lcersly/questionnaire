@@ -5,7 +5,7 @@
   <form (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. pat@example.com">
+      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. email@example.com">
       <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
         Udfyld en gyldig email adresse
       </mat-error>
@@ -40,6 +40,10 @@
 </ng-container>
 
 <ng-template #wrongAnswers>
-  <p>Du fik kun {{questionService.correctAnswers()}} / {{questionService.totalAnswers()}} rigtige.</p>
+  <h3>{{questionService.correctAnswersAmount()}} / {{questionService.totalAnswersAmount()}} rigtige.</h3>
+  <p>Du svarede forkert på</p>
+  <p *ngFor="let answer of questionService.incorrectAnswers()">
+    Spørgsmål {{answer.questionNumber}}
+  </p>
   <button mat-raised-button (click)="startOver()">Prøv igen</button>
 </ng-template>

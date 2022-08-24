@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Question} from "../models/question.model";
 import {BehaviorSubject, combineLatest, first, map, ReplaySubject, shareReplay} from "rxjs";
 
-type Answer = { index: number | number[], correct: boolean };
+type Answer = { answerIndex: number | number[], correct: boolean, questionNumber: number };
 
 type PositionType = 'start' | 'question' | 'end' | 'submit' | undefined;
 
@@ -27,7 +27,7 @@ export class QuestionService {
   public currentQuestionHasNoAnswer$ = this.currentQuestionAnswer$.pipe(
     map(answer => {
       if (!answer) return undefined;
-      return answer.index === -1;
+      return answer.answerIndex === -1;
     }),
     shareReplay(1)
   );
@@ -58,7 +58,7 @@ export class QuestionService {
 
     const values = [];
     for (let i = 0; i < this.questionnaireLength; i++) {
-      values.push({correct: false, index: -1})
+      values.push({correct: false, answerIndex: -1, questionNumber: i + 1} as Answer)
     }
     // console.debug("Resetting questionnaire to", values);
 
@@ -70,39 +70,44 @@ export class QuestionService {
   }
 
   public isAllAnswersCorrect() {
-    return this.correctAnswers() == this.totalAnswers();
+    return this.correctAnswersAmount() == this.totalAnswersAmount();
   }
 
   public isAnyAnswerIncorrect() {
-    return this.incorrectAnswers() > 0;
+    return this.incorrectAnswersAmount() > 0;
   }
 
-  public incorrectAnswers() {
+  public incorrectAnswersAmount() {
     return this.answers$.getValue().reduce((prev, current) => !current.correct ? prev + 1 : prev, 0)
   }
 
 
-  public correctAnswers() {
+  public correctAnswersAmount() {
     return this.answers$.getValue().reduce((prev, current) => current.correct ? prev + 1 : prev, 0)
   }
 
-  public totalAnswers() {
+  public totalAnswersAmount() {
     return this.answers$.getValue().length;
+  }
+
+  public incorrectAnswers() {
+    return this.answers$.getValue().filter((answer) => !answer.correct)
   }
 
   public registerAnswer(value: number | number[]) {
     return combineLatest([this.currentPosition, this.answers$])
       .pipe(first())
-      .subscribe(([pos, answers]) => {
-        const index = pos.index;
-        const question = pos.question;
+      .subscribe(([position, answers]) => {
+        const index = position.index;
+        const question = position.question;
         if (!answers || index == undefined || !question) {
           console.error("Index, answers or question undefined", answers, index, question);
           return;
         }
         const answer: Answer = answers[index];
-        answer.index = value;
+        answer.answerIndex = value;
         answer.correct = QuestionService.isAnswerCorrect(question, value);
+        answer.questionNumber = index + 1
         this.answers$.next([...answers]);
 
         localStorage.setItem("answers", JSON.stringify(answers));

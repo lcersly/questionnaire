@@ -38,9 +38,9 @@ export class HeaderComponent implements OnInit {
 
         if (type == 'submit') {
           // calculate correct answers %
-          const total = this.answerService.totalAnswers();
+          const total = this.answerService.totalAnswersAmount();
           if (total != 0) {
-            return this.answerService.correctAnswers() * 100 / total
+            return this.answerService.correctAnswersAmount() * 100 / total
           }
         }
 
