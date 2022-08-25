@@ -13,9 +13,24 @@ import {SignupData} from "../../../../models/signup.model";
 })
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    mobile: new FormControl('', [Validators.required]),
+    name: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(60)
+      ]
+    ),
+    email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]
+    ),
+    mobile: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(8),
+        Validators.pattern(/^\d*$/)
+      ]
+    ),
   })
 
   constructor(private navService: NavigationService,
@@ -55,7 +70,7 @@ export class PageSubmitComponent implements OnInit {
     }
 
     this.firestoreService.sendSignup(this.form.value as SignupData)
-      .subscribe((data) => {
+      .subscribe(() => {
         //console.info("Response from firebase", data);
         localStorage.clear();
         this.router.navigate(['..', 'thanks'], {relativeTo: this.route});

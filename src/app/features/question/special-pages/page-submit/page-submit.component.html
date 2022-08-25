@@ -5,8 +5,9 @@
   <form (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. email@example.com">
-      <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. email@example.com"
+             autocomplete="email">
+      <mat-error *ngIf="emailControl.hasError('email')">
         Udfyld en gyldig email adresse
       </mat-error>
       <mat-error *ngIf="emailControl.hasError('required')">
@@ -16,17 +17,32 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Navn</mat-label>
-      <input type="text" matInput [formControl]="nameControl">
+      <input type="text" matInput [formControl]="nameControl" autocomplete="name">
       <mat-error *ngIf="nameControl.hasError('required')">
         Navn er <strong>krævet</strong>
+      </mat-error>
+      <mat-error *ngIf="nameControl.hasError('minlength')">
+        Navn skal minimum være på <strong>{{nameControl.getError("minlength").requiredLength}}</strong> karakterer
+      </mat-error>
+      <mat-error *ngIf="nameControl.hasError('maxlength')">
+        Navn må maksimum være <strong>{{nameControl.getError("maxlength").requiredLength}}</strong> karakterer langt
       </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Mobil nummer</mat-label>
-      <input type="tel" matInput [formControl]="mobileControl">
+      <input type="tel" matInput [formControl]="mobileControl" autocomplete="tel">
       <mat-error *ngIf="mobileControl.hasError('required')">
         Mobil nummer er <strong>krævet</strong>
+      </mat-error>
+      <mat-error *ngIf="mobileControl.hasError('minlength')">
+        Mobil nummer skal være på <strong>{{mobileControl.getError("minlength").requiredLength}}</strong> karakterer
+      </mat-error>
+      <mat-error *ngIf="mobileControl.hasError('maxlength')">
+        Mobil nummer skal være på <strong>{{mobileControl.getError("maxlength").requiredLength}}</strong> karakterer
+      </mat-error>
+      <mat-error *ngIf="mobileControl.hasError('pattern')">
+        Mobil nummer må kun indeholde tal
       </mat-error>
     </mat-form-field>
 

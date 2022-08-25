@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {environment} from "../../../../environments/environment";
+import {Component, OnDestroy, Optional} from '@angular/core';
 import {SignupService} from "../signup.service";
+import {Auth} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-admin-root',
@@ -9,18 +9,13 @@ import {SignupService} from "../signup.service";
   `,
   styles: []
 })
-export class AdminRootComponent implements OnInit, OnDestroy {
-  isProduction = environment.production;
-  correctAnswer: number[] | undefined;
-
-  constructor(private firebase: SignupService) {
-  }
-
-  ngOnInit(): void {
-    this.firebase.connect()
+export class AdminRootComponent implements OnDestroy {
+  constructor(private firebase: SignupService,
+              @Optional() private auth: Auth,
+  ) {
   }
 
   ngOnDestroy(): void {
-    this.firebase.disconnect()
+    this.firebase.disconnect();
   }
 }

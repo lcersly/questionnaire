@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {DocumentData, FirestoreDataConverter, QuerySnapshot} from 'firebase/firestore';
 import {SignupDatabase, SignupFull, Status} from "../../models/signup.model";
 import {collection, doc, Firestore, onSnapshot, Unsubscribe, updateDoc, writeBatch} from "@angular/fire/firestore";
-import {from, map, ReplaySubject} from "rxjs";
+import {distinctUntilChanged, from, map, ReplaySubject, shareReplay, startWith} from "rxjs";
 
 @Injectable({
   providedIn: null
@@ -14,24 +14,40 @@ export class SignupService {
     map(data => data ? data.map(doc => doc.data()) : null)
   );
 
+  public readonly isConnected$ = this.signups$.pipe(
+    // tap(data => console.info(data)),
+    map((data) => data != null),
+    startWith(false),
+    distinctUntilChanged(),
+    shareReplay(1),
+  );
+
   private unsubscribe?: Unsubscribe;
 
   constructor(private firestore: Firestore) {
+    this.isConnected$.subscribe(connected => console.info("isConnected", connected));
   }
 
   connect() {
     if (this.unsubscribe) {
       throw new Error("Already connected to signups");
     }
-    this.unsubscribe = onSnapshot(this.collection, next => this.signups.next(next));
+    console.debug("Connecting to signups");
+    this.unsubscribe = onSnapshot(this.collection, next => this.signups.next(next), error => {
+      console.error("Error connecting", error);
+      if (this.unsubscribe) {
+        this.unsubscribe();
+        this.unsubscribe = undefined;
+      }
+    });
   }
-
 
   disconnect() {
     if (!this.unsubscribe) {
       throw new Error("Not connected to signups");
     }
     this.unsubscribe();
+    this.unsubscribe = undefined;
     this.signups.next(null);
   }
 

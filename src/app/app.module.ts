@@ -20,6 +20,7 @@ import {MatCardModule} from "@angular/material/card";
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       const auth = getAuth();
+      // auth.setPersistence({type: "SESSION"});
       if (environment.useEmulators) {
         connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
       }

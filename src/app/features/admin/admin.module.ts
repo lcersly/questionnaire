@@ -13,13 +13,14 @@ import {MatIconModule} from "@angular/material/icon";
 import {SignupService} from "./signup.service";
 import {
   DialogSignupEditMultipleComponent
-} from "./components/answer-list/signup-dialog/dialog-signup-edit-multiple.component";
+} from "./components/answer-list/signup-edit-dialog/dialog-signup-edit-multiple.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {
   DialogSignupPickedComponent
 } from "./components/answer-list/signup-picked-dialog/dialog-signup-picked.component";
 import {environment} from "../../../environments/environment";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {environment} from "../../../environments/environment";
     MatIconModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     //uses lite version of firestore
   ],
   providers: [
