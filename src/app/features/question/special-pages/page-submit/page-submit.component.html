@@ -1,49 +1,32 @@
 <ng-container *ngIf="questionService.isAllAnswersCorrect(); else wrongAnswers">
-  <p>Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.</p>
+  <p>{{'special-pages.submit.correct.header.ALLCORR' | translate}}</p>
   <p>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</p>
 
   <form (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput [formControl]="emailControl" placeholder="Ex. email@example.com"
+      <mat-label>{{'special-pages.submit.correct.form.email.label' | translate}}</mat-label>
+      <input type="email" matInput [formControl]="emailControl"
+             [placeholder]="'special-pages.submit.correct.form.email.placeholder' | translate"
              autocomplete="email">
-      <mat-error *ngIf="emailControl.hasError('email')">
-        Udfyld en gyldig email adresse
-      </mat-error>
-      <mat-error *ngIf="emailControl.hasError('required')">
-        Email er <strong>krævet</strong>
-      </mat-error>
+      <mat-error *ngFor="let error of emailControl.errors | keyvalue"
+                 [innerHTML]="getError(error, 'emailValidation') | async"
+      ></mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Navn</mat-label>
+      <mat-label>{{'special-pages.submit.correct.form.name.label' | translate}}</mat-label>
       <input type="text" matInput [formControl]="nameControl" autocomplete="name">
-      <mat-error *ngIf="nameControl.hasError('required')">
-        Navn er <strong>krævet</strong>
-      </mat-error>
-      <mat-error *ngIf="nameControl.hasError('minlength')">
-        Navn skal minimum være på <strong>{{nameControl.getError("minlength").requiredLength}}</strong> karakterer
-      </mat-error>
-      <mat-error *ngIf="nameControl.hasError('maxlength')">
-        Navn må maksimum være <strong>{{nameControl.getError("maxlength").requiredLength}}</strong> karakterer langt
-      </mat-error>
+      <mat-error *ngFor="let error of nameControl.errors | keyvalue"
+                 [innerHTML]="getError(error, 'nameValidation') | async"
+      ></mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Mobil nummer</mat-label>
+      <mat-label>{{'special-pages.submit.correct.form.mobile.label' | translate}}</mat-label>
       <input type="tel" matInput [formControl]="mobileControl" autocomplete="tel">
-      <mat-error *ngIf="mobileControl.hasError('required')">
-        Mobil nummer er <strong>krævet</strong>
-      </mat-error>
-      <mat-error *ngIf="mobileControl.hasError('minlength')">
-        Mobil nummer skal være på <strong>{{mobileControl.getError("minlength").requiredLength}}</strong> karakterer
-      </mat-error>
-      <mat-error *ngIf="mobileControl.hasError('maxlength')">
-        Mobil nummer skal være på <strong>{{mobileControl.getError("maxlength").requiredLength}}</strong> karakterer
-      </mat-error>
-      <mat-error *ngIf="mobileControl.hasError('pattern')">
-        Mobil nummer må kun indeholde tal
-      </mat-error>
+      <mat-error *ngFor="let error of mobileControl.errors | keyvalue"
+                 [innerHTML]="getError(error, 'mobileValidation') | async"
+      ></mat-error>
     </mat-form-field>
 
     <button mat-raised-button routerLink="../4" type="button">

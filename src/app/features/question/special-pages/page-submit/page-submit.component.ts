@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../../../../services/question.service";
 import {NavigationService} from "../../../../services/navigation.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FirestoreService} from "../../../../services/firestore.service";
 import {SignupData} from "../../../../models/signup.model";
+import {KeyValue} from "@angular/common";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-page-finish',
@@ -14,7 +16,7 @@ import {SignupData} from "../../../../models/signup.model";
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl('', [
-        Validators.required,
+      Validators.required,
         Validators.minLength(3),
         Validators.maxLength(60)
       ]
@@ -37,7 +39,8 @@ export class PageSubmitComponent implements OnInit {
               public questionService: QuestionService,
               private router: Router,
               private route: ActivatedRoute,
-              private firestoreService: FirestoreService
+              private firestoreService: FirestoreService,
+              private translateService: TranslateService
   ) {
   }
 
@@ -80,5 +83,9 @@ export class PageSubmitComponent implements OnInit {
   startOver() {
     this.questionService.resetQuestionnaire();
     this.router.navigate(['..', 'start'], {relativeTo: this.route});
+  }
+
+  getError(error: KeyValue<string, ValidationErrors>, section: string) {
+    return this.translateService.get(`special-pages.submit.correct.form.${section}.${error.key}`, error.value)
   }
 }

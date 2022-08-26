@@ -1,0 +1,9 @@
+{
+  "special-pages": {
+    "start": {
+      "WELCOMH": "Welcome to Bankdata's quiz",
+      "ANSWERS": "You must answer {{questions}} questions correctly to participate in the contest",
+      "STARTNO": "Click here to start"
+    }
+  }
+}
