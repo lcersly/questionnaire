@@ -7,7 +7,7 @@
     "start-emulators": "firebase emulators:start --export-on-exit=./saved-data --import=./saved-data",
     "prestart": "npm run merge-i18n",
     "merge-i18n": "node scripts/i18n/merge.i18n.mjs",
-    "build": "ng build",
+    "build": "npm run merge-i18n && ng build",
     "watch": "ng build --watch --configuration development",
     "build:stats": "ng build --stats-json",
     "analyze": "webpack-bundle-analyzer dist/angular-bundle-analyzer-example/stats.json",
