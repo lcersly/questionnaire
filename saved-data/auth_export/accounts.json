@@ -1,0 +1,31 @@
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "8MnHRT2KmRloAcQc219owskZYfGD",
+      "createdAt": "1661458630135",
+      "lastLoginAt": "1661459222819",
+      "displayName": "Peach Chicken",
+      "screenName": "chicken_peach",
+      "email": "peach.chicken.742@example.com",
+      "emailVerified": true,
+      "providerUserInfo": [
+        {
+          "providerId": "google.com",
+          "rawId": "3889641619699776343518014556498569833544",
+          "federatedId": "3889641619699776343518014556498569833544",
+          "displayName": "Peach Chicken",
+          "email": "peach.chicken.742@example.com",
+          "screenName": "chicken_peach"
+        }
+      ],
+      "lastRefreshAt": "2022-08-25T20:27:02.819Z"
+    },
+    {
+      "localId": "xLnH7eJqZbegEwWzWVWlBJqWwDqE",
+      "createdAt": "1661458950372",
+      "lastLoginAt": "1661458950372",
+      "lastRefreshAt": "2022-08-25T20:22:30.372Z"
+    }
+  ]
+}
