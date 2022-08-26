@@ -1,0 +1,39 @@
+{
+  "special-pages": {
+    "submit": {
+      "correct": {
+        "header": {
+          "ALLCORR": "Congratulations, you can now participate in the lottery",
+          "CONTACT": "Fill out your contact information below, we will only use them to contact you if you are drawn"
+        },
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Ex. email@example.com"
+          },
+          "emailValidation": {
+            "email": "Enter a valid email",
+            "required": "Email is <strong>required</strong>"
+          },
+          "name": {
+            "label": "Name"
+          },
+          "nameValidation": {
+            "required": "Name is <strong>required</strong>",
+            "minlength": "Name must at least be <strong>{{requiredLength}}</strong> characters long",
+            "maxlength": "Name must be less than <strong>{{requiredLength}}</strong> characters"
+          },
+          "mobile": {
+            "label": "Cellphone"
+          },
+          "mobileValidation": {
+            "required": "Cellphone is <strong>required</strong>",
+            "minlength": "Must have at least <strong>{{requiredLength}}</strong> digits",
+            "maxlength": "Cannot be longer than <strong>{{length}}</strong> digits",
+            "pattern": "Must only contain digits"
+          }
+        }
+      }
+    }
+  }
+}

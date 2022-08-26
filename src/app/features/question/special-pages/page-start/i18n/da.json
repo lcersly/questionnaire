@@ -1,0 +1,9 @@
+{
+  "special-pages": {
+    "start": {
+      "WELCOMH": "Velkommen til Bankdata's quiz",
+      "ANSWERS": "Du skal svare rigtigt på {{questions}} spørgsmål for at kunne deltage i lodtrækningen.",
+      "STARTNO": "Klik herunder for at starte."
+    }
+  }
+}

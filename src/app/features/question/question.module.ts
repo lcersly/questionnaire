@@ -21,6 +21,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {QuestionPageComponent} from "./question-page/question-page.component";
 import {HIGHLIGHT_OPTIONS, HighlightModule} from "ngx-highlightjs";
 import {CodePageElementComponent} from './shared/code-page-element/code-page-element.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {CodePageElementComponent} from './shared/code-page-element/code-page-ele
     MatInputModule,
     MatToolbarModule,
     MatProgressBarModule,
-    HighlightModule
+    HighlightModule,
+    TranslateModule.forChild({extend: true})
   ],
   providers: [{
     provide: HIGHLIGHT_OPTIONS,

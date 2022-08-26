@@ -1,0 +1,39 @@
+{
+  "special-pages": {
+    "submit": {
+      "correct": {
+        "header": {
+          "ALLCORR": "Du svarede rigtigt på alle spørgsmål og kan nu deltage i konkurrencen.",
+          "CONTACT": "Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes."
+        },
+        "form": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Ex. email@example.com"
+          },
+          "emailValidation": {
+            "email": "Udfyld en gyldig email adresse",
+            "required": "Email er <strong>krævet</strong>"
+          },
+          "name": {
+            "label": "Navn"
+          },
+          "nameValidation": {
+            "required": "Navn er <strong>krævet</strong>",
+            "minlength": "Navn skal minimum være på <strong>{{requiredLength}}</strong> karakterer",
+            "maxlength": "Navn må maksimum være <strong>{{requiredLength}}</strong> karakterer langt"
+          },
+          "mobile": {
+            "label": "Mobil nummer"
+          },
+          "mobileValidation": {
+            "required": "Mobil nummer er <strong>krævet</strong>",
+            "minlength": "Mobil nummer skal være på <strong>{{requiredLength}}</strong> karakterer",
+            "maxlength": "Navn må maksimum være <strong>{{length}}</strong> karakterer langt",
+            "pattern": "Mobil nummer må kun indeholde tal"
+          }
+        }
+      }
+    }
+  }
+}
