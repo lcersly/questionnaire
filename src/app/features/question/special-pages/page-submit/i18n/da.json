@@ -28,9 +28,9 @@
           },
           "mobileValidation": {
             "required": "Mobil nummer er <strong>krævet</strong>",
-            "minlength": "Mobil nummer skal være på <strong>{{requiredLength}}</strong> karakterer",
-            "maxlength": "Navn må maksimum være <strong>{{length}}</strong> karakterer langt",
-            "pattern": "Mobil nummer må kun indeholde tal"
+            "minlength": "Mobil nummer skal minimum være på <strong>{{requiredLength}}</strong> karakterer",
+            "maxlength": "Mobil nummer må maksimum være <strong>{{requiredLength}}</strong> karakterer langt",
+            "pattern": "Ugyldigt mobil nummer"
           }
         }
       }
