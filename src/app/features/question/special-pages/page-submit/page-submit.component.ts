@@ -16,8 +16,8 @@ import {TranslateService} from "@ngx-translate/core";
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
     name: new FormControl('', [
-      Validators.required,
-        Validators.minLength(3),
+        Validators.required,
+        Validators.minLength(2),
         Validators.maxLength(60)
       ]
     ),
@@ -29,8 +29,8 @@ export class PageSubmitComponent implements OnInit {
     mobile: new FormControl('', [
         Validators.required,
         Validators.minLength(8),
-        Validators.maxLength(8),
-        Validators.pattern(/^\d*$/)
+        Validators.maxLength(12),
+        Validators.pattern(/^[+]?\d*$/)
       ]
     ),
   })

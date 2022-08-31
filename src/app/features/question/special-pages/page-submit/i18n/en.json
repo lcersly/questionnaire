@@ -30,7 +30,7 @@
             "required": "Cellphone is <strong>required</strong>",
             "minlength": "Must have at least <strong>{{requiredLength}}</strong> digits",
             "maxlength": "Cannot be longer than <strong>{{length}}</strong> digits",
-            "pattern": "Must only contain digits"
+            "pattern": "Invalid phone number"
           }
         }
       }
