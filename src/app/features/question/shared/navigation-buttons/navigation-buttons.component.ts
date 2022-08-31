@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationService} from "../../../../services/navigation.service";
 import {QuestionService} from "../../../../services/question.service";
+import {Observable} from "rxjs";
 
-export type NavigationButton = { text: string, link: string, enableWithoutAnswer?: boolean };
+export type NavigationButton = { text: Observable<string>, link: string, enableWithoutAnswer?: boolean };
 
 @Component({
   selector: 'app-navigation-buttons',

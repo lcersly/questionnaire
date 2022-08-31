@@ -1,0 +1,10 @@
+{
+  "question-page": {
+    "buttons": {
+      "BACKTOSTART": "Back to start",
+      "NEXTQUESTION": "Next question",
+      "PREVIOUSQUESTION": "Back",
+      "SUBMIT": "Submit"
+    }
+  }
+}
