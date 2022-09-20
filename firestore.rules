@@ -18,12 +18,8 @@ service cloud.firestore {
       allow get,update,delete,list: if isAdmin();
     }
 
-    match /admins {
+    match /admins/{userId} {
       allow read,write: if isAdmin();
-
-      //match /{userId} {
-      //  allow read: if isSignedIn() && request.auth.uid == userId;
-      //}
     }
   }
 }

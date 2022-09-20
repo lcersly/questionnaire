@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <span>Admin section</span>
+  <button routerLink="/admin/answers" mat-button [disabled]="isActiveRoute('answers')">Answers</button>
+  <button routerLink="/admin/manage-admins" mat-button [disabled]="isActiveRoute('manage-admins')">Manage admins
+  </button>
+  <div class="spacer"></div>
+  <ng-content></ng-content>
+  <div class="spacer"></div>
+  <button (click)="logout()" mat-button>Logout</button>
+</mat-toolbar>

@@ -21,6 +21,13 @@ import {
 } from "./components/answer-list/signup-picked-dialog/dialog-signup-picked.component";
 import {environment} from "../../../environments/environment";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ManageAdminsComponent} from './components/manage-admins/manage-admins.component';
+import {AdminHeaderComponent} from './components/admin-header/admin-header.component';
+import {MatListModule} from "@angular/material/list";
+import {AdminService} from "./admin.service";
+import {DialogAddAdminComponent} from "./components/manage-admins/add-admin-dialog/dialog-add-admin.component";
+import {MatInputModule} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -30,6 +37,9 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     AdminRootComponent,
     DialogSignupEditMultipleComponent,
     DialogSignupPickedComponent,
+    DialogAddAdminComponent,
+    ManageAdminsComponent,
+    AdminHeaderComponent,
   ],
   imports: [
     provideFirestore(() => {
@@ -49,10 +59,14 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatDialogModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatInputModule,
+    ReactiveFormsModule,
     //uses lite version of firestore
   ],
   providers: [
-    SignupService
+    SignupService,
+    AdminService,
   ]
 })
 export class AdminModule {

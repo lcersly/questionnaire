@@ -1,7 +1,3 @@
-.spacer {
-  flex-grow: 1;
-}
-
 mat-table {
   margin: 20px;
 
@@ -15,6 +11,9 @@ mat-table {
 }
 
 #actions {
+  display: flex;
+  justify-content: center;
+
   button {
     margin: 5px;
   }

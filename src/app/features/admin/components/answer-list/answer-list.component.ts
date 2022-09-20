@@ -28,11 +28,11 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MatSort) matSort: MatSort | undefined;
   private onDestroy = new Subject<void>();
   displayedColumns = ['select', 'name', 'mobile', 'email', 'signupTime', 'status'];
-  public isConnected = false;
+  public isConnected?: boolean = undefined;
 
-  constructor(@Optional() private auth: Auth,
+  constructor(@Optional() public auth: Auth,
               private router: Router,
-              private signupService: SignupService,
+              public signupService: SignupService,
               private dialog: MatDialog) {
   }
 
@@ -113,10 +113,6 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.selection.select(...this.dataSource.data);
-  }
-
-  logout(): void {
-    this.auth.signOut().then(() => this.router.navigateByUrl("/admin"));
   }
 
   startPick() {

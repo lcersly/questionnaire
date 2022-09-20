@@ -2,7 +2,9 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+import {EnvironmentModel} from "./environment.model";
+
+export const environment: EnvironmentModel = {
   production: false,
   firebase: {
     apiKey: "AIzaSyAX26rs0kqHX5II8KhUlVvUETrLW2eiYBU",
@@ -11,9 +13,8 @@ export const environment = {
     storageBucket: "questionnaire-test-b3636.appspot.com",
     messagingSenderId: "95548162383",
     appId: "1:95548162383:web:71f69abbeed10371b7c53a",
-    measurementId: "G-VT1JP623MM"
   },
-  useEmulators: true,
+  useEmulators: false,
 };
 
 /*
