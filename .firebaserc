@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "bd-quiz-20bb0"
-  }
+    "default": "bd-quiz-20bb0",
+    "production": "bd-quiz-20bb0"
+  },
+  "targets": {},
+  "etags": {}
 }
