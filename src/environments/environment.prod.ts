@@ -1,13 +1,14 @@
-export const environment = {
+import {EnvironmentModel} from "./environment.model";
+
+export const environment: EnvironmentModel = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyAX26rs0kqHX5II8KhUlVvUETrLW2eiYBU",
-    authDomain: "questionnaire-test-b3636.firebaseapp.com",
-    projectId: "questionnaire-test-b3636",
-    storageBucket: "questionnaire-test-b3636.appspot.com",
-    messagingSenderId: "95548162383",
-    appId: "1:95548162383:web:71f69abbeed10371b7c53a",
-    measurementId: "G-VT1JP623MM"
+    apiKey: "AIzaSyDJi3YywUbvvDQO7omXPdoert1I-qaYowQ",
+    authDomain: "bd-quiz-20bb0.firebaseapp.com",
+    projectId: "bd-quiz-20bb0",
+    storageBucket: "bd-quiz-20bb0.appspot.com",
+    messagingSenderId: "661942349623",
+    appId: "1:661942349623:web:e8e4ebd0faffc59ad8b4b2"
   },
   useEmulators: false,
 };

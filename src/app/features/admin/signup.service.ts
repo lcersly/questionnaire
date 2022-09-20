@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {DocumentData, FirestoreDataConverter, QuerySnapshot} from 'firebase/firestore';
 import {SignupDatabase, SignupFull, Status} from "../../models/signup.model";
 import {collection, doc, Firestore, onSnapshot, Unsubscribe, updateDoc, writeBatch} from "@angular/fire/firestore";
-import {distinctUntilChanged, from, map, ReplaySubject, shareReplay, startWith} from "rxjs";
+import {BehaviorSubject, from, map, ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: null
@@ -14,13 +14,8 @@ export class SignupService {
     map(data => data ? data.map(doc => doc.data()) : null)
   );
 
-  public readonly isConnected$ = this.signups$.pipe(
-    // tap(data => console.info(data)),
-    map((data) => data != null),
-    startWith(false),
-    distinctUntilChanged(),
-    shareReplay(1),
-  );
+  public readonly isConnected$ = new BehaviorSubject<boolean>(false);
+  public readonly isAdmin$ = new BehaviorSubject<boolean | undefined>(undefined);
 
   private unsubscribe?: Unsubscribe;
 
@@ -33,22 +28,32 @@ export class SignupService {
       throw new Error("Already connected to signups");
     }
     console.debug("Connecting to signups");
-    this.unsubscribe = onSnapshot(this.collection, next => this.signups.next(next), error => {
-      console.error("Error connecting", error);
+    this.isConnected$.next(false);
+
+    this.unsubscribe = onSnapshot(this.collection, next => {
+      this.signups.next(next);
+      this.isConnected$.next(true);
+      this.isAdmin$.next(true);
+    }, error => {
+      console.error("Error connecting to signup list", error);
       if (this.unsubscribe) {
         this.unsubscribe();
         this.unsubscribe = undefined;
       }
+      this.isAdmin$.next(false);
     });
   }
 
   disconnect() {
     if (!this.unsubscribe) {
-      throw new Error("Not connected to signups");
+      console.error("Not connected to signups");
+      return
     }
     this.unsubscribe();
     this.unsubscribe = undefined;
     this.signups.next(null);
+    this.isConnected$.next(false);
+    this.isAdmin$.next(false);
   }
 
   get collection() {
