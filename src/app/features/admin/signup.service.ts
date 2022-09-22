@@ -20,12 +20,13 @@ export class SignupService {
   private unsubscribe?: Unsubscribe;
 
   constructor(private firestore: Firestore) {
-    this.isConnected$.subscribe(connected => console.info("isConnected", connected));
+    // this.isConnected$.subscribe(connected => console.info("isConnected", connected));
   }
 
   connect() {
     if (this.unsubscribe) {
-      throw new Error("Already connected to signups");
+      console.warn("Already connected to signups")
+      return;
     }
     console.debug("Connecting to signups");
     this.isConnected$.next(false);
@@ -45,15 +46,16 @@ export class SignupService {
   }
 
   disconnect() {
+    this.signups.next(null);
+    this.isConnected$.next(false);
+    this.isAdmin$.next(false);
+
     if (!this.unsubscribe) {
-      console.error("Not connected to signups");
+      console.warn("Not connected to signups");
       return
     }
     this.unsubscribe();
     this.unsubscribe = undefined;
-    this.signups.next(null);
-    this.isConnected$.next(false);
-    this.isAdmin$.next(false);
   }
 
   get collection() {

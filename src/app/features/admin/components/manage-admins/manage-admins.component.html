@@ -3,5 +3,8 @@
 <button mat-flat-button (click)="openAddAdminDialog()">Add new admin</button>
 
 <mat-list>
-  <mat-list-item *ngFor="let admin of adminService.admins$ | async">{{admin.uid}} | {{admin.name}}</mat-list-item>
+  <mat-list-item *ngFor="let admin of adminService.admins$ | async">
+    {{admin.uid}} | {{admin.name}}
+    <span class="you" *ngIf="admin.uid === auth.currentUser?.uid"><-- this is you</span>
+  </mat-list-item>
 </mat-list>

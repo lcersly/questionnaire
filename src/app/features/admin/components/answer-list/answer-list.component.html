@@ -1,6 +1,6 @@
 <app-admin-header>
   <div id="stats" *ngIf="lastSignup">
-    Latest signup: {{lastSignup | date:'short'}}
+    Latest signup: {{lastSignup | localizedDate:'short'}}
   </div>
 </app-admin-header>
 
@@ -21,10 +21,22 @@
         <mat-icon>edit</mat-icon>
       </button>
 
-      <span>Signups: {{dataSource.data.length}}</span>
-      <span>Not picked: {{getSignupCount(null)}}</span>
-      <span>Notified: {{getSignupCount('notified')}}</span>
-      <span>Redeemed: {{getSignupCount('redeemed')}}</span>
+      <div>
+        <span>Signups</span>
+        <mat-icon [matBadge]="dataSource.data.length">ballot</mat-icon>
+      </div>
+      <div>
+        Not picked
+        <mat-icon [matBadge]="getSignupCount(null)">quiz</mat-icon>
+      </div>
+      <div>
+        Notified
+        <mat-icon [matBadge]="getSignupCount('notified')">done</mat-icon>
+      </div>
+      <div>
+        Redeemed
+        <mat-icon [matBadge]="getSignupCount('redeemed')">done_all</mat-icon>
+      </div>
     </div>
 
     <mat-table [dataSource]="dataSource" class="mat-elevation-z8"
@@ -35,7 +47,7 @@
 
       <ng-container matColumnDef="signupTime">
         <mat-header-cell *matHeaderCellDef mat-sort-header="signupTime">Signup time</mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.signupTime | date:'short'}}</mat-cell>
+        <mat-cell *matCellDef="let element">{{element.signupTime | localizedDate:'short'}}</mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="name">
@@ -56,6 +68,7 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let element">
+          <mat-icon *ngIf="element.status === null">quiz</mat-icon>
           <mat-icon *ngIf="element.status === 'pulled'">shuffle</mat-icon>
           <mat-icon *ngIf="element.status === 'notified'">done</mat-icon>
           <mat-icon *ngIf="element.status === 'redeemed'">done_all</mat-icon>

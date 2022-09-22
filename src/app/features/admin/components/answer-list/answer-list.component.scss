@@ -13,12 +13,15 @@ mat-table {
 #actions {
   display: flex;
   justify-content: center;
+  justify-items: center;
 
   button {
     margin: 5px;
   }
 
-  span {
-    margin: 20px;
+  div {
+    margin-left: 20px;
+    padding-top: 15px;
+    display: flex;
   }
 }

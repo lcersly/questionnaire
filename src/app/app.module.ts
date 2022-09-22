@@ -12,10 +12,14 @@ import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular
 import {MatCardModule} from "@angular/material/card";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {registerLocaleData} from "@angular/common";
+import localeDa from '@angular/common/locales/da';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
+registerLocaleData(localeDa, 'da')
 
 @NgModule({
   declarations: [
@@ -56,8 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

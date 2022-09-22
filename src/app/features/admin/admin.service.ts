@@ -34,7 +34,6 @@ export class AdminService {
     console.debug("Connecting to admins");
 
     this.unsubscribe = onSnapshot(this.collection, next => {
-      console.info("Admins", next.docs)
       this.admins.next(next);
     }, error => {
       console.error("Error connecting to admin firebase list", error);
@@ -82,7 +81,6 @@ const converter: FirestoreDataConverter<Admin> = {
   },
   fromFirestore(snapshot): Admin {
     let documentData = snapshot.data() as AdminDatabase;
-    console.info(documentData);
     return {
       ...documentData,
       uid: snapshot.id

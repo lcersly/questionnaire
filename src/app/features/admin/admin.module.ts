@@ -29,6 +29,8 @@ import {DialogAddAdminComponent} from "./components/manage-admins/add-admin-dial
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {getApp} from "@angular/fire/app";
+import {MatBadgeModule} from "@angular/material/badge";
+import {LocalizedDatePipe} from "./localized-date.pipe";
 
 
 @NgModule({
@@ -41,6 +43,7 @@ import {getApp} from "@angular/fire/app";
     DialogAddAdminComponent,
     ManageAdminsComponent,
     AdminHeaderComponent,
+    LocalizedDatePipe
   ],
   imports: [
     provideFirestore(() => {
@@ -64,6 +67,7 @@ import {getApp} from "@angular/fire/app";
     MatListModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatBadgeModule,
     //uses lite version of firestore
   ],
   providers: [
