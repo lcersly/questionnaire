@@ -5,7 +5,7 @@ import {AnswerListComponent} from './components/answer-list/answer-list.componen
 import {MatButtonModule} from "@angular/material/button";
 import {AdminRootComponent} from "./components/admin-root.component";
 import {AdminRoutingModule} from "./admin-routing.module";
-import {connectFirestoreEmulator, getFirestore, provideFirestore} from "@angular/fire/firestore";
+import {connectFirestoreEmulator, initializeFirestore, provideFirestore} from "@angular/fire/firestore";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
@@ -28,6 +28,7 @@ import {AdminService} from "./admin.service";
 import {DialogAddAdminComponent} from "./components/manage-admins/add-admin-dialog/dialog-add-admin.component";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import {getApp} from "@angular/fire/app";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {ReactiveFormsModule} from "@angular/forms";
   ],
   imports: [
     provideFirestore(() => {
-      const firestore = getFirestore();
+      //experimentalForceLongPolling is needed. Otherwise, the BD proxy will block the requests to firestore.
+      const firestore = initializeFirestore(getApp(), {experimentalForceLongPolling: true});
       if (environment.useEmulators) {
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       }
