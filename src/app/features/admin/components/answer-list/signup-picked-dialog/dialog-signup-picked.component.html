@@ -7,8 +7,12 @@
       <td><a [href]="'mailto:'+data.signup.email">{{data.signup.email}}</a></td>
     </tr>
     <tr>
-      <th>Mobile</th>
+      <th>Call</th>
       <td><a [href]="'tel:'+data.signup.mobile">{{data.signup.mobile}}</a></td>
+    </tr>
+    <tr>
+      <th>Send SMS</th>
+      <td><a [href]="'sms:'+data.signup.mobile">{{data.signup.mobile}}</a></td>
     </tr>
   </table>
 </div>
