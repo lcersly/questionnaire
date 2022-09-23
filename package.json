@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "start-emulators": "firebase emulators:start --export-on-exit=./saved-data --import=./saved-data --project=default",
+    "start-emulators": "firebase emulators:start --only auth,firestore --export-on-exit=./saved-data --import=./saved-data --project=default",
     "prestart": "npm run merge-i18n",
     "merge-i18n": "node scripts/i18n/merge.i18n.mjs",
     "build": "npm run merge-i18n && ng build",

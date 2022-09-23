@@ -50,6 +50,7 @@ import {LocalizedDatePipe} from "./localized-date.pipe";
       //experimentalForceLongPolling is needed. Otherwise, the BD proxy will block the requests to firestore.
       const firestore = initializeFirestore(getApp(), {experimentalForceLongPolling: true});
       if (environment.useEmulators) {
+        console.info("Using emulator for admin firestore");
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       }
       return firestore

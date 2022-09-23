@@ -32,6 +32,7 @@ registerLocaleData(localeDa, 'da')
       const auth = getAuth();
       // auth.setPersistence({type: "SESSION"});
       if (environment.useEmulators) {
+        console.info("Using emulator for authentication")
         connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
       }
       return auth;
@@ -39,6 +40,7 @@ registerLocaleData(localeDa, 'da')
     provideFirestore(() => {
       const firestore = getFirestore();
       if (environment.useEmulators) {
+        console.info("Using emulator for user firestore")
         connectFirestoreEmulator(firestore, 'localhost', 8080);
       }
       return firestore;

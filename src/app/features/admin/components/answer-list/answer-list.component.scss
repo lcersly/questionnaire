@@ -12,7 +12,7 @@ mat-table {
 
 #actions {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   justify-items: center;
 
   button {
@@ -24,4 +24,8 @@ mat-table {
     padding-top: 15px;
     display: flex;
   }
+}
+
+.stats {
+  margin-left: 20px;
 }

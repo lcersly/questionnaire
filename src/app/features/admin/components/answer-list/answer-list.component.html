@@ -12,30 +12,35 @@
 
   <ng-container *ngIf="(signupService.isAdmin$ | async); else notAdmin">
     <div id="actions">
-      <button mat-flat-button (click)="startPick()" [disabled]="!canPick">Pick random
-        <mat-icon>shuffle</mat-icon>
-      </button>
+      <div>
+        <button mat-raised-button (click)="startPick()" [disabled]="!canPick">Pick random
+          <mat-icon>shuffle</mat-icon>
+        </button>
 
-      <button mat-flat-button (click)="editSelection()" [disabled]="selection.isEmpty()">
-        Edit
-        <mat-icon>edit</mat-icon>
-      </button>
+        <button mat-raised-button (click)="editSelection()" [disabled]="selection.isEmpty()"
+                [matBadge]="selection.selected.length" [matBadgeHidden]="selection.isEmpty()">
+          Edit
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
 
-      <div>
-        <span>Signups</span>
-        <mat-icon [matBadge]="dataSource.data.length">ballot</mat-icon>
-      </div>
-      <div>
-        Not picked
-        <mat-icon [matBadge]="getSignupCount(null)">quiz</mat-icon>
-      </div>
-      <div>
-        Notified
-        <mat-icon [matBadge]="getSignupCount('notified')">done</mat-icon>
-      </div>
-      <div>
-        Redeemed
-        <mat-icon [matBadge]="getSignupCount('redeemed')">done_all</mat-icon>
+      <div class="stats">
+        <div>
+          <span>Signups</span>
+          <mat-icon [matBadge]="dataSource.data.length">ballot</mat-icon>
+        </div>
+        <div>
+          Not picked
+          <mat-icon [matBadge]="getSignupCount()">quiz</mat-icon>
+        </div>
+        <div>
+          Notified
+          <mat-icon [matBadge]="getSignupCount('notified')">done</mat-icon>
+        </div>
+        <div>
+          Redeemed
+          <mat-icon [matBadge]="getSignupCount('redeemed')">done_all</mat-icon>
+        </div>
       </div>
     </div>
 
@@ -68,7 +73,7 @@
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <mat-icon *ngIf="element.status === null">quiz</mat-icon>
+          <mat-icon *ngIf="!element.status">quiz</mat-icon>
           <mat-icon *ngIf="element.status === 'pulled'">shuffle</mat-icon>
           <mat-icon *ngIf="element.status === 'notified'">done</mat-icon>
           <mat-icon *ngIf="element.status === 'redeemed'">done_all</mat-icon>

@@ -47,6 +47,7 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
         const newSelection = this.selection.selected
           .map(org => data!.find(d => d.uid === org.uid))
           .filter(value => !!value) as SignupFull[];
+        this.selection.clear();
         this.selection.select(...newSelection);
       }
       this.dataSource.data = data;
@@ -94,8 +95,13 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.dataSource.data.find(signup => !signup.status);
   }
 
-  getSignupCount(status: Status) {
-    return this.dataSource.data.filter(signup => signup.status === status).length;
+  getSignupCount(status?: Status) {
+    return this.dataSource.data.filter(signup => {
+      if (!status) {
+        return !signup.status;
+      }
+      return signup.status === status;
+    }).length;
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
