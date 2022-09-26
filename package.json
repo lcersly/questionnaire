@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start-emulators": "firebase emulators:start --only auth,firestore --export-on-exit=./saved-data --import=./saved-data --project=default",
+    "force-kill-emulators": "npx kill-port --port 8080,9099",
     "prestart": "npm run merge-i18n",
     "merge-i18n": "node scripts/i18n/merge.i18n.mjs",
     "build": "npm run merge-i18n && ng build",
