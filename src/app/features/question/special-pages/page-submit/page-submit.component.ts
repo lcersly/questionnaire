@@ -7,6 +7,7 @@ import {FirestoreService} from "../../../../services/firestore.service";
 import {SignupData} from "../../../../models/signup.model";
 import {KeyValue} from "@angular/common";
 import {TranslateService} from "@ngx-translate/core";
+import {QuizService} from "../../../../services/quiz.service";
 
 @Component({
   selector: 'app-page-finish',
@@ -40,7 +41,8 @@ export class PageSubmitComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private firestoreService: FirestoreService,
-              private translateService: TranslateService
+              private translateService: TranslateService,
+              private quizService: QuizService,
   ) {
   }
 
@@ -72,7 +74,9 @@ export class PageSubmitComponent implements OnInit {
       return;
     }
 
-    this.firestoreService.sendSignup(this.form.value as SignupData)
+    let value = this.form.value as SignupData;
+    value.quizId = this.quizService.quiz?.name;
+    this.firestoreService.sendSignup(value)
       .subscribe(() => {
         //console.info("Response from firebase", data);
         localStorage.clear();

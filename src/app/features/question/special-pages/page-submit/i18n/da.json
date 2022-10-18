@@ -33,7 +33,17 @@
             "pattern": "Ugyldigt mobil nummer"
           }
         }
+      },
+      "incorrect": {
+        "right-answers": "rigtige.",
+        "you-answered-wrong": "Du svarede forkert på",
+        "question": "Spørgsmål"
       }
+    },
+    "buttons": {
+      "back": "Tilbage",
+      "send_results": "Send",
+      "start_over": "Prøv igen"
     }
   }
 }

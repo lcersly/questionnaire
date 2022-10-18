@@ -11,9 +11,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatIconModule} from "@angular/material/icon";
 import {SignupService} from "./signup.service";
-import {
-  DialogSignupEditMultipleComponent
-} from "./components/answer-list/signup-edit-dialog/dialog-signup-edit-multiple.component";
+import {DialogQuizPickComponent} from "./components/answer-list/signup-edit-dialog/dialog-quiz-pick.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {
@@ -31,6 +29,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {getApp} from "@angular/fire/app";
 import {MatBadgeModule} from "@angular/material/badge";
 import {LocalizedDatePipe} from "./localized-date.pipe";
+import {
+  DialogSignupEditMultipleComponent
+} from "./components/answer-list/quiz-pick-dialog/dialog-signup-edit-multiple.component";
 
 
 @NgModule({
@@ -38,9 +39,10 @@ import {LocalizedDatePipe} from "./localized-date.pipe";
     LoginPageComponent,
     AnswerListComponent,
     AdminRootComponent,
-    DialogSignupEditMultipleComponent,
+    DialogQuizPickComponent,
     DialogSignupPickedComponent,
     DialogAddAdminComponent,
+    DialogSignupEditMultipleComponent,
     ManageAdminsComponent,
     AdminHeaderComponent,
     LocalizedDatePipe

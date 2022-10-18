@@ -38,10 +38,12 @@ export class QuestionService {
     // this.answers$.subscribe(answers => console.info("Answers updated", answers));
   }
 
+  private readonly oldAnswers = "answers";
+
   public setQuestionnaireLength(length: number) {
     this.questionnaireLength = length;
 
-    const oldRawAnswers = localStorage.getItem("answers");
+    const oldRawAnswers = localStorage.getItem(this.oldAnswers);
     if (oldRawAnswers) {
       const oldAnswers = JSON.parse(oldRawAnswers);
       if (oldAnswers?.length == this.questionnaireLength) {
@@ -54,7 +56,7 @@ export class QuestionService {
   }
 
   public resetQuestionnaire() {
-    localStorage.removeItem('answers');
+    localStorage.removeItem(this.oldAnswers);
 
     const values = [];
     for (let i = 0; i < this.questionnaireLength; i++) {

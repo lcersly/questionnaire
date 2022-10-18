@@ -1,6 +1,6 @@
 <ng-container *ngIf="questionService.isAllAnswersCorrect(); else wrongAnswers">
   <p>{{'special-pages.submit.correct.header.ALLCORR' | translate}}</p>
-  <p>Udfyld dine kontaktoplysninger herunder, så kontakter vi dig hvis du udtrækkes.</p>
+  <p>{{'special-pages.submit.correct.header.CONTACT' | translate}}</p>
 
   <form (ngSubmit)="submit()">
     <mat-form-field appearance="fill">
@@ -30,19 +30,19 @@
     </mat-form-field>
 
     <button mat-raised-button routerLink="../4" type="button">
-      Tilbage
+      {{'special-pages.buttons.back' | translate}}
     </button>
     <button mat-raised-button>
-      Send resultater
+      {{'special-pages.buttons.send_results' | translate}}
     </button>
   </form>
 </ng-container>
 
 <ng-template #wrongAnswers>
-  <h3>{{questionService.correctAnswersAmount()}} / {{questionService.totalAnswersAmount()}} rigtige.</h3>
-  <p>Du svarede forkert på</p>
+  <h3>{{questionService.correctAnswersAmount()}} / {{questionService.totalAnswersAmount()}} {{'special-pages.submit.incorrect.right-answers' | translate}}</h3>
+  <p>{{'special-pages.submit.incorrect.you-answered-wrong' | translate}}</p>
   <p *ngFor="let answer of questionService.incorrectAnswers()">
-    Spørgsmål {{answer.questionNumber}}
+    {{'special-pages.submit.incorrect.question' | translate}} {{answer.questionNumber}}
   </p>
-  <button mat-raised-button (click)="startOver()">Prøv igen</button>
+  <button mat-raised-button (click)="startOver()">{{'special-pages.buttons.start_over' | translate}}</button>
 </ng-template>

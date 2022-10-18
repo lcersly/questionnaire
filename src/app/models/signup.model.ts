@@ -3,7 +3,8 @@ import {Timestamp} from "@angular/fire/firestore";
 export interface SignupData {
   name: string,
   email: string,
-  mobile: string
+  mobile: string,
+  quizId?: string,
 }
 
 export type Status = 'pulled' | 'notified' | 'redeemed' | null;

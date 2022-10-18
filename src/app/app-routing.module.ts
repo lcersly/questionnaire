@@ -7,10 +7,10 @@ import {PageThanksComponent} from "./features/question/special-pages/page-thanks
 import {QuestionPageComponent} from "./features/question/question-page/question-page.component";
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'start'},
+  {path: '', pathMatch: 'full', redirectTo: 'developer/start'},
   {path: 'admin', loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)},
   {
-    path: '', component: QuestionRootComponent, children: [
+    path: ':quiz', component: QuestionRootComponent, children: [
       {path: '', pathMatch: 'full', redirectTo: 'start'},
       {path: 'start', component: PageStartComponent},
       {path: 'submit', component: PageSubmitComponent},
