@@ -46,9 +46,12 @@ export class QuestionPageComponent implements OnInit {
         let next = {link: '../' + (pageId + 1), text: this.buttonText('NEXTQUESTION')};
 
         //special handling of first and last question
+        console.info("Pageid", pageId, quiz.questions.length);
         if (pageId === 0) {
           prev = {link: '../start', text: this.buttonText('BACKTOSTART')};
         } else if (pageId === quiz.questions.length) {
+          next.link = '../submit'
+        } else if (pageId > quiz.questions.length) {
           next = {link: '../submit', text: this.buttonText('Send')};
         }
 

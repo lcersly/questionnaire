@@ -5,6 +5,7 @@ import {QuestionsCode} from "./questions/code";
 import {ReplaySubject} from "rxjs";
 import {Question} from "../models/question.model";
 import {QuestionService} from "./question.service";
+import {QuestionsBankdata} from "./questions/bankdata";
 
 export type Quiz = {
   name: string;
@@ -22,6 +23,16 @@ const quizes: { [key: string]: Quiz } = {
       QuestionsCode["referential-transparent"],
       QuestionsCode["addition-of-numbers"]
     ]
+  },
+  'bankdata':{
+    name: 'Bankdata',
+    route: 'bankdata',
+    questions: [
+      QuestionsBankdata["what-does-bankdata-do"],
+      QuestionsBankdata["the-whole-person"],
+      QuestionsBankdata["devops-mindset"],
+      QuestionsBankdata["working-expectations"],
+    ]
   }
 };
 
@@ -31,8 +42,10 @@ const quizes: { [key: string]: Quiz } = {
 })
 export class QuizService {
   public readonly quiz$ = new ReplaySubject<Quiz | undefined>()
+  public quiz?: Quiz;
 
   constructor(private questionService: QuestionService) {
+    this.quiz$.subscribe(quiz=>this.quiz=quiz);
   }
 
   setQuiz(quizId: string) {

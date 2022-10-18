@@ -20,6 +20,10 @@ export class FirestoreService {
   }
 
   sendSignup(signup: SignupData) {
+    if(!signup.quizId){
+      throw new Error("QuizID not set");
+    }
+
     let credentials$;
     if (this.auth?.currentUser?.uid) {
       credentials$ = of(this.auth.currentUser.uid)

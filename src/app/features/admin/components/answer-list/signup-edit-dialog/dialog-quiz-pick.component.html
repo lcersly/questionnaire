@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Pick which quiz to pick for</h1>
+
+<div mat-dialog-content>
+  <button mat-flat-button (click)="pickQuiz()" color="primary">Any quiz</button>
+  <button mat-flat-button
+          *ngFor="let quiz of data.quizIds"
+          (click)="pickQuiz(quiz)"
+          color="primary"
+  >
+    {{ quiz ? quiz : '"Empty"' }}
+  </button>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button (click)="cancelClick()">Cancel</button>
+</div>

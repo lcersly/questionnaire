@@ -5,6 +5,7 @@ export interface Question {
   readonly answers: PageElement[];
   readonly options: {
     readonly type: 'radio' | 'checkbox',
+    /** ZERO indexed */
     readonly correctIndex: number[]
   };
 }

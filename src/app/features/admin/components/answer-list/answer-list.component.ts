@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {Auth} from "@angular/fire/auth";
 import {Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
@@ -9,26 +9,35 @@ import {SignupService} from "../../signup.service";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {
-  DialogSignupEditMultipleComponent,
-  DialogSignupEditMultipleData
-} from "./signup-edit-dialog/dialog-signup-edit-multiple.component";
+  DialogQuizPickComponent,
+  DialogQuizPickComponentData,
+  DialogQuizPickComponentResult,
+} from "./signup-edit-dialog/dialog-quiz-pick.component";
 import {
   DialogSignupPickedComponent,
   DialogSignupPickedData
 } from "./signup-picked-dialog/dialog-signup-picked.component";
+import {
+  DialogSignupEditMultipleComponent,
+  DialogSignupEditMultipleData
+} from "./quiz-pick-dialog/dialog-signup-edit-multiple.component";
 
 @Component({
   selector: 'app-answer-list',
   templateUrl: './answer-list.component.html',
   styleUrls: ['./answer-list.component.scss']
 })
-export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AnswerListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<SignupFull>([]);
   selection = new SelectionModel<SignupFull>(true, []);
-  @ViewChild(MatSort) matSort: MatSort | undefined;
   private onDestroy = new Subject<void>();
-  displayedColumns = ['select', 'name', 'mobile', 'email', 'signupTime', 'status'];
+  displayedColumns = ['select', 'name', 'mobile', 'email', 'quizId', 'signupTime', 'status'];
   public isConnected?: boolean = undefined;
+
+  @ViewChild(MatSort)
+  private set matSort(sort: MatSort) {
+    this.dataSource.sort = sort;
+  }
 
   constructor(@Optional() public auth: Auth,
               private router: Router,
@@ -74,12 +83,6 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.onDestroy.complete();
   }
 
-  ngAfterViewInit(): void {
-    if (this.matSort) {
-      this.dataSource.sort = this.matSort;
-    }
-  }
-
   get lastSignup() {
     const latestSignup = this.dataSource.data.reduce((previousValue, currentValue) => {
       if (!previousValue.signupTime || currentValue.signupTime >= previousValue.signupTime) {
@@ -122,9 +125,37 @@ export class AnswerListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   startPick() {
-    const signups = this.dataSource.data.filter(signup => !signup.status);
-    const randomIndex = Math.floor(Math.random() * signups.length)
-    const pick = signups[randomIndex];
+    let unPickedSignups = this.dataSource.data.filter(signup => !signup.status);
+
+    let quizIds = unPickedSignups.reduce((prev, curr) => {
+      if (prev.indexOf(curr.quizId) == -1) {
+        prev.push(curr.quizId);
+      }
+      return prev;
+    }, [] as (string | undefined)[]);
+
+    if (!quizIds.length) {
+      throw new Error("No quiz ids detected");
+    } else if (quizIds.length == 1) {
+      this.pickRandomSignup(unPickedSignups);
+    } else {
+      this.dialog.open(DialogQuizPickComponent, {
+        data: {quizIds: quizIds} as DialogQuizPickComponentData,
+        disableClose: true,
+        autoFocus: false
+      }).afterClosed().subscribe((quizId: DialogQuizPickComponentResult) => {
+        if (!quizId.selected) {
+          return;
+        }
+        unPickedSignups = unPickedSignups.filter(signup => signup.quizId === quizId.quizId)
+        this.pickRandomSignup(unPickedSignups);
+      });
+    }
+  }
+
+  private pickRandomSignup(unPickedSignups: SignupFull[]){
+    const randomIndex = Math.floor(Math.random() * unPickedSignups.length)
+    const pick = unPickedSignups[randomIndex];
 
     this.dialog.open(DialogSignupPickedComponent, {
       data: {signup: pick} as DialogSignupPickedData,

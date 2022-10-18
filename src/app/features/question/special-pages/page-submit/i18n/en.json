@@ -33,7 +33,17 @@
             "pattern": "Invalid phone number"
           }
         }
+      },
+      "incorrect": {
+        "right-answers": "correct.",
+        "you-answered-wrong": "You answered these wrong",
+        "question": "Question"
       }
+    },
+    "buttons": {
+      "back": "Back",
+      "send_results": "Submit",
+      "start_over": "Start over"
     }
   }
 }
