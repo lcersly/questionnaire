@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Question} from "../models/question.model";
 import {BehaviorSubject, combineLatest, first, map, ReplaySubject, shareReplay} from "rxjs";
+import {environment} from "../../environments/environment";
 
 type Answer = { answerIndex: number | number[], correct: boolean, questionNumber: number };
 
@@ -109,6 +110,10 @@ export class QuestionService {
         const answer: Answer = answers[index];
         answer.answerIndex = value;
         answer.correct = QuestionService.isAnswerCorrect(question, value);
+        if(!environment.production){
+          console.info("Correct answer", answer.correct, question, value)
+        }
+
         answer.questionNumber = index + 1
         this.answers$.next([...answers]);
 

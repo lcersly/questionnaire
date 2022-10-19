@@ -1,4 +1,7 @@
-<ng-container *ngFor="let element of headerElements" [ngSwitch]="element.type">
+<ng-container *ngFor="let element of headerElements; let i = index" [ngSwitch]="element.type">
   <app-code-answer-option *ngSwitchCase="'code'" [element]="element"></app-code-answer-option>
-  <span class="question-text" *ngSwitchDefault>{{element.content}}</span>
+  <span class="question-text" *ngSwitchDefault>
+    <span class="question-text" *ngIf="i == 0">{{index}}:</span>
+    {{element.content}}
+  </span>
 </ng-container>
