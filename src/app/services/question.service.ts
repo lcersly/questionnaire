@@ -34,30 +34,29 @@ export class QuestionService {
   );
 
   private questionnaireLength = 0;
+  private quizName = "";
 
   constructor() {
     // this.answers$.subscribe(answers => console.info("Answers updated", answers));
   }
 
-  private readonly oldAnswers = "answers";
+  private readonly oldAnswersKey = "answers";
 
-  public setQuestionnaireLength(length: number) {
+  public setQuizDetails(length: number, quizName: string) {
     this.questionnaireLength = length;
+    this.quizName = quizName;
 
-    const oldRawAnswers = localStorage.getItem(this.oldAnswers);
-    if (oldRawAnswers) {
-      const oldAnswers = JSON.parse(oldRawAnswers);
-      if (oldAnswers?.length == this.questionnaireLength) {
-        console.debug("Using old answers for initialize with", oldAnswers);
-        this.answers$.next(oldAnswers);
-        return;
-      }
+    // load old questions
+    if (this.restoreQuestionsFromLocalStorage()) {
+      return;
     }
+
+    // if no old questions, reset the quiz
     this.resetQuestionnaire();
   }
 
   public resetQuestionnaire() {
-    localStorage.removeItem(this.oldAnswers);
+    localStorage.removeItem(this.oldAnswersKey);
 
     const values = [];
     for (let i = 0; i < this.questionnaireLength; i++) {
@@ -110,14 +109,14 @@ export class QuestionService {
         const answer: Answer = answers[index];
         answer.answerIndex = value;
         answer.correct = QuestionService.isAnswerCorrect(question, value);
-        if(!environment.production){
+        if (!environment.production) {
           console.info("Correct answer", answer.correct, question, value)
         }
 
         answer.questionNumber = index + 1
         this.answers$.next([...answers]);
 
-        localStorage.setItem("answers", JSON.stringify(answers));
+        this.storeAnswersInLocalStorage()
       })
   }
 
@@ -134,4 +133,22 @@ export class QuestionService {
     return question.options.correctIndex.includes(answer)
   }
 
+  private storeAnswersInLocalStorage() {
+    this.answers$.pipe(first()).subscribe(answers => {
+      localStorage.setItem(`${this.oldAnswersKey}.${this.quizName}`, JSON.stringify(answers));
+    })
+  }
+
+  private restoreQuestionsFromLocalStorage() {
+    const oldRawAnswers = localStorage.getItem(`${this.oldAnswersKey}.${this.quizName}`);
+    if (oldRawAnswers) {
+      const oldAnswers = JSON.parse(oldRawAnswers);
+      if (oldAnswers?.length == this.questionnaireLength) {
+        console.debug("Using old answers for initialize with", oldAnswers);
+        this.answers$.next(oldAnswers);
+        return true;
+      }
+    }
+    return false;
+  }
 }

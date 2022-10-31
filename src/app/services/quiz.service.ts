@@ -59,10 +59,12 @@ export class QuizService {
     console.info("Loading quiz: " + quiz.name)
 
     this.quiz$.next(quiz);
-    this.questionService.setQuestionnaireLength(quiz.questions.length);
+    this.questionService.setQuizDetails(quiz.questions.length, quiz.name);
   }
 
   getDefault() {
     return Object.keys(quizes)[0]
   }
+
+
 }
