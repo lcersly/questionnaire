@@ -24,7 +24,7 @@ export const QuestionsSprint = {
         },
         {
           type: 'simple-text',
-          content: 'Department manager'
+          content: 'Team manager'
         },
       ],
       options: {
