@@ -24,7 +24,7 @@ export const QuestionsREST = {
     ],
     options: {
       type: 'radio',
-      correctIndex: [1],
+      correctIndex: [2],
     }
   } as Question
 } as const
