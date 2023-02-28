@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(@Optional() private auth: Auth, private router: Router) {
+  constructor(@Optional() public auth: Auth, private router: Router) {
   }
 
   ngOnInit(): void {
