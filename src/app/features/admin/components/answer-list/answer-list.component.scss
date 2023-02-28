@@ -1,15 +1,17 @@
-mat-table {
-  .mat-column-status {
-    flex: 0 0 30px;
-  }
-
-  .mat-column-select {
-    flex: 0 0 30px;
-  }
-}
-
 #table-container {
   margin: 20px;
+}
+
+.mat-column-status {
+  max-width: 40px;
+}
+
+.mat-column-select {
+  max-width: 30px;
+}
+
+.mat-column-signupTime {
+  max-width: 80px;
 }
 
 #actions {

@@ -11,7 +11,6 @@ import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
 import {MatIconModule} from "@angular/material/icon";
 import {SignupService} from "./signup.service";
-import {DialogQuizPickComponent} from "./components/answer-list/signup-edit-dialog/dialog-quiz-pick.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {
@@ -29,9 +28,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {getApp} from "@angular/fire/app";
 import {MatBadgeModule} from "@angular/material/badge";
 import {LocalizedDatePipe} from "./localized-date.pipe";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {DialogQuizPickComponent} from "./components/answer-list/pick-quiz-dialog/dialog-quiz-pick.component";
 import {
   DialogSignupEditMultipleComponent
-} from "./components/answer-list/quiz-pick-dialog/dialog-signup-edit-multiple.component";
+} from "./components/answer-list/edit-multiple-dialog/dialog-signup-edit-multiple.component";
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import {
     MatInputModule,
     ReactiveFormsModule,
     MatBadgeModule,
+    MatTooltipModule,
     //uses lite version of firestore
   ],
   providers: [

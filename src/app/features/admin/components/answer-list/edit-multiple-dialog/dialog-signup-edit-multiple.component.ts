@@ -32,7 +32,7 @@ export class DialogSignupEditMultipleComponent {
   }
 
   setStatus(status: Status) {
-    this.signupService.setStatusMultiple(this.data.links, status).subscribe();
+    this.signupService.setStatusMultiple(this.data.links, status).subscribe(() => this.dialogRef.close());
   }
 }
 

@@ -9,18 +9,18 @@ import {SignupService} from "../../signup.service";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
 import {
-  DialogQuizPickComponent,
-  DialogQuizPickComponentData,
-  DialogQuizPickComponentResult,
-} from "./signup-edit-dialog/dialog-quiz-pick.component";
-import {
   DialogSignupPickedComponent,
   DialogSignupPickedData
 } from "./signup-picked-dialog/dialog-signup-picked.component";
 import {
+  DialogQuizPickComponent,
+  DialogQuizPickComponentData,
+  DialogQuizPickComponentResult
+} from "./pick-quiz-dialog/dialog-quiz-pick.component";
+import {
   DialogSignupEditMultipleComponent,
   DialogSignupEditMultipleData
-} from "./quiz-pick-dialog/dialog-signup-edit-multiple.component";
+} from "./edit-multiple-dialog/dialog-signup-edit-multiple.component";
 
 @Component({
   selector: 'app-answer-list',
@@ -29,7 +29,7 @@ import {
 })
 export class AnswerListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<SignupFull>([]);
-  selection = new SelectionModel<SignupFull>(true, []);
+  selection = new SelectionModel<SignupFull>(true, [], true, (o1, o2) => o1.id == o2.id);
   private onDestroy = new Subject<void>();
   displayedColumns = ['select', 'name', 'mobile', 'email', 'quizId', 'signupTime', 'status'];
   public isConnected?: boolean = undefined;
@@ -148,7 +148,9 @@ export class AnswerListComponent implements OnInit, OnDestroy {
         if (!result.selected) {
           return;
         }
-        unPickedSignups = unPickedSignups.filter(signup => signup.quizId === result.quizId)
+        if (result.quizId) {
+          unPickedSignups = unPickedSignups.filter(signup => signup.quizId === result.quizId)
+        }
         this.pickRandomSignup(unPickedSignups);
       });
     }
