@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DocumentData, FirestoreDataConverter, QuerySnapshot} from 'firebase/firestore';
-import {addDoc, collection, deleteDoc, doc, Firestore, onSnapshot, Unsubscribe} from "@angular/fire/firestore";
+import {collection, deleteDoc, doc, Firestore, onSnapshot, setDoc, Unsubscribe} from "@angular/fire/firestore";
 import {from, map, ReplaySubject} from "rxjs";
 
 interface AdminDatabase {
@@ -63,7 +63,7 @@ export class AdminService {
   }
 
   addAdmin(admin: Admin) {
-    return from(addDoc(this.collection, admin));
+    return from(setDoc(this.getDoc(admin.uid), admin)); //uid is also stored as a field
   }
 
   deleteAdmin(admin: Admin) {

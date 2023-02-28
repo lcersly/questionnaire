@@ -14,7 +14,7 @@ export const environment: EnvironmentModel = {
     messagingSenderId: "95548162383",
     appId: "1:95548162383:web:71f69abbeed10371b7c53a",
   },
-  useEmulators: true,
+  useEmulators: false,
 };
 
 /*

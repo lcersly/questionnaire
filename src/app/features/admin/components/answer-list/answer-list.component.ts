@@ -143,11 +143,12 @@ export class AnswerListComponent implements OnInit, OnDestroy {
         data: {quizIds: quizIds} as DialogQuizPickComponentData,
         disableClose: true,
         autoFocus: false
-      }).afterClosed().subscribe((quizId: DialogQuizPickComponentResult) => {
-        if (!quizId.selected) {
+      }).afterClosed().subscribe((result: DialogQuizPickComponentResult) => {
+        console.info("quiz id result", result, unPickedSignups)
+        if (!result.selected) {
           return;
         }
-        unPickedSignups = unPickedSignups.filter(signup => signup.quizId === quizId.quizId)
+        unPickedSignups = unPickedSignups.filter(signup => signup.quizId === result.quizId)
         this.pickRandomSignup(unPickedSignups);
       });
     }
