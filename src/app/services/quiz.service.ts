@@ -41,7 +41,6 @@ const quizes: Record<string, Quiz> = {
       QuestionsREST["idempotent-method"],
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["advanced-addition"],
-      QuestionsCode["addition-of-numbers"]
     ]
   }
 };

@@ -85,7 +85,7 @@ export const QuestionsCode = {
         languageHighlighting: 'java',
         content:
           `int a = 5;
-int b = ++a+++a;
+int b = ++a + ++a;
 System.out.println(b);`
       }
     ],
