@@ -13,7 +13,7 @@ export type Quiz = {
   questions: Question[]
 };
 
-const quizes: { [key: string]: Quiz } = {
+const quizes: Record<string, Quiz> = {
   'developer': {
     name: 'Developer',
     route: 'developer',
@@ -24,7 +24,7 @@ const quizes: { [key: string]: Quiz } = {
       QuestionsCode["addition-of-numbers"]
     ]
   },
-  'bankdata':{
+  'bankdata': {
     name: 'Bankdata',
     route: 'bankdata',
     questions: [
@@ -32,6 +32,16 @@ const quizes: { [key: string]: Quiz } = {
       QuestionsBankdata["the-whole-person"],
       QuestionsBankdata["devops-mindset"],
       QuestionsBankdata["working-expectations"],
+    ]
+  },
+  'ucl': {
+    name: 'UCL',
+    route: 'ucl',
+    questions: [
+      QuestionsREST["idempotent-method"],
+      QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
+      QuestionsCode["advanced-addition"],
+      QuestionsCode["addition-of-numbers"]
     ]
   }
 };

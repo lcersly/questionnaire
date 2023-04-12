@@ -73,5 +73,39 @@ export const QuestionsCode = {
       type: 'radio',
       correctIndex: [1],
     }
+  } as Question,
+  "advanced-addition": {
+    question: [
+      {
+        type: 'simple-text',
+        content: 'What is the output of the following expression "b"'
+      },
+      {
+        type: "code",
+        languageHighlighting: 'java',
+        content:
+          `int a = 5;
+int b = ++a+++a;
+System.out.println(b);`
+      }
+    ],
+    answers: [
+      {
+        type: "simple-text",
+        content: '12'
+      },
+      {
+        type: "simple-text",
+        content: '13'
+      },
+      {
+        type: "simple-text",
+        content: 'a'
+      }
+    ],
+    options: {
+      type: 'radio',
+      correctIndex: [1],
+    }
   } as Question
 } as const;
