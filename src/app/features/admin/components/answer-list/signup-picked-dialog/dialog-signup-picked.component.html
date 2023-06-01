@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{data.signup.name}}</h1>
 
-<div mat-dialog-content>
+<mat-dialog-content >
   <table>
     <tr>
       <th>Mail</th>
@@ -19,10 +19,10 @@
       <td>{{data.signup.quizId}}</td>
     </tr>
   </table>
-</div>
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions >
   <button mat-flat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
   <button mat-flat-button (click)="markContacted()" color="primary">
     Mark contacted
   </button>
-</div>
+</mat-dialog-actions>

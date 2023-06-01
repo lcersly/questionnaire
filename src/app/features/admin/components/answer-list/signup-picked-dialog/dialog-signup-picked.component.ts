@@ -1,13 +1,18 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {SignupFull} from "../../../../../models/signup.model";
 import {SignupService} from "../../../signup.service";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-    selector: 'app-dialog-delete',
-    templateUrl: './dialog-signup-picked.component.html',
-    styleUrls: ['./dialog-signup-picked.component.scss'],
-    standalone: true
+  selector: 'app-dialog-delete',
+  templateUrl: './dialog-signup-picked.component.html',
+  styleUrls: ['./dialog-signup-picked.component.scss'],
+  imports: [
+    MatDialogModule,
+    MatButtonModule
+  ],
+  standalone: true
 })
 export class DialogSignupPickedComponent {
 

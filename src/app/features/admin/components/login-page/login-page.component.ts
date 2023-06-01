@@ -2,12 +2,16 @@ import {Component, OnInit, Optional} from '@angular/core';
 import {Auth, GoogleAuthProvider, signInWithPopup,} from '@angular/fire/auth';
 import {from} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-    selector: 'app-login-page',
-    templateUrl: './login-page.component.html',
-    styleUrls: ['./login-page.component.scss'],
-    standalone: true
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss'],
+  imports: [
+    MatButtonModule
+  ],
+  standalone: true
 })
 export class LoginPageComponent implements OnInit {
 
