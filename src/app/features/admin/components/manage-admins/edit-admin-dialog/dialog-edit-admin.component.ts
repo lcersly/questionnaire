@@ -1,23 +1,35 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {SignupFull} from "../../../../../models/signup.model";
 import {Admin, AdminService} from "../../../admin.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-  selector: 'app-dialog-admin-edit',
+  selector: 'app-dialog-delete',
   templateUrl: './dialog-edit-admin.component.html',
   styleUrls: ['./dialog-edit-admin.component.scss'],
+  standalone: true,
+  imports: [
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule
+  ]
 })
 export class DialogEditAdminComponent {
 
   public form = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    name: new FormControl('', Validators.required),
+    uid: new FormControl('', Validators.required),
   })
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAdminComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogAddAdminData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogEditAdminData,
     private adminService: AdminService
   ) {
   }
@@ -43,6 +55,6 @@ export class DialogEditAdminComponent {
   }
 }
 
-export interface DialogAddAdminData {
-  links: SignupFull[];
+export interface DialogEditAdminData {
+  admin: Admin;
 }

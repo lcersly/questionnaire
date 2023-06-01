@@ -1,16 +1,30 @@
 import {Component, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {Admin, AdminService} from "../../admin.service";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogEditAdminComponent} from "./add-admin-dialog/dialog-edit-admin.component";
+import {DialogAddAdminComponent} from "./add-admin-dialog/dialog-add-admin.component";
 import {Auth} from "@angular/fire/auth";
-import {MatTableDataSource} from "@angular/material/table";
-import {MatSort} from "@angular/material/sort";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
+import {MatSort, MatSortModule} from "@angular/material/sort";
 import {Subject, takeUntil} from "rxjs";
+import {DialogEditAdminComponent, DialogEditAdminData} from "./edit-admin-dialog/dialog-edit-admin.component";
+import {AdminHeaderComponent} from "../admin-header/admin-header.component";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-manage-admins',
   templateUrl: './manage-admins.component.html',
-  styleUrls: ['./manage-admins.component.scss']
+  styleUrls: ['./manage-admins.component.scss'],
+  imports: [
+    AdminHeaderComponent,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
+    NgIf
+  ],
+  standalone: true
 })
 export class ManageAdminsComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Admin> = new MatTableDataSource<Admin>();
@@ -45,10 +59,10 @@ export class ManageAdminsComponent implements OnInit, OnDestroy {
 
 
   openAddAdminDialog() {
-    this.dialog.open(DialogEditAdminComponent);
+    this.dialog.open(DialogAddAdminComponent);
   }
 
   editUser(element: Admin) {
-
+    this.dialog.open(DialogEditAdminComponent, {data: {admin: element} as DialogEditAdminData});
   }
 }

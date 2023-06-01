@@ -4,9 +4,10 @@ import {SignupFull} from "../../../../../models/signup.model";
 import {SignupService} from "../../../signup.service";
 
 @Component({
-  selector: 'app-dialog-delete',
-  templateUrl: './dialog-signup-picked.component.html',
-  styleUrls: ['./dialog-signup-picked.component.scss'],
+    selector: 'app-dialog-delete',
+    templateUrl: './dialog-signup-picked.component.html',
+    styleUrls: ['./dialog-signup-picked.component.scss'],
+    standalone: true
 })
 export class DialogSignupPickedComponent {
 

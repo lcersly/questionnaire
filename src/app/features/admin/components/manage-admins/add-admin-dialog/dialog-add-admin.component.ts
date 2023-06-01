@@ -1,19 +1,30 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {SignupFull} from "../../../../../models/signup.model";
 import {Admin, AdminService} from "../../../admin.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
-  selector: 'app-dialog-delete',
+  selector: 'app-dialog-admin-edit',
   templateUrl: './dialog-add-admin.component.html',
   styleUrls: ['./dialog-add-admin.component.scss'],
+  standalone: true,
+  imports: [
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule
+  ]
 })
 export class DialogAddAdminComponent {
 
   public form = new FormGroup({
-    name: new FormControl('', Validators.required),
-    uid: new FormControl('', Validators.required),
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    uid: new FormControl('', [Validators.required, Validators.minLength(10)]),
   })
 
   constructor(

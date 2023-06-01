@@ -2,11 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../../../../services/question.service";
 import {combineLatest, map, Observable, of} from "rxjs";
 import {ThemePalette} from "@angular/material/core";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: true,
+    imports: [MatToolbarModule, NgIf, MatProgressBarModule, AsyncPipe]
 })
 export class HeaderComponent implements OnInit {
 

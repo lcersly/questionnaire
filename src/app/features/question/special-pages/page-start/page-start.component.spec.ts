@@ -8,8 +8,8 @@ describe('PageStartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PageStartComponent]
-    })
+    imports: [PageStartComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(PageStartComponent);

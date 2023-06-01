@@ -1,14 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router, RouterOutlet } from "@angular/router";
 import {NavigationService} from "../../services/navigation.service";
 import {QuestionService} from "../../services/question.service";
 import {environment} from "../../../environments/environment";
 import {QuizService} from "../../services/quiz.service";
+import { HeaderComponent } from './shared/header/header.component';
 
 @Component({
-  selector: 'app-static-root',
-  templateUrl: 'question-root.component.html',
-  styleUrls: ['question-root.component.scss']
+    selector: 'app-static-root',
+    templateUrl: 'question-root.component.html',
+    styleUrls: ['question-root.component.scss'],
+    standalone: true,
+    imports: [HeaderComponent, RouterOutlet]
 })
 export class QuestionRootComponent implements OnInit {
   isProduction = environment.production;

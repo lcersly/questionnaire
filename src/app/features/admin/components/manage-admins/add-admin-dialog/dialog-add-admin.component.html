@@ -11,6 +11,7 @@
     <input matInput placeholder="UID" [formControl]="uidControl">
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="cancelClick()" color="warn">Cancel</button>
   <button mat-button (click)="addAdmin()" [disabled]="form.invalid">Add</button>

@@ -4,9 +4,10 @@ import {from} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+    selector: 'app-login-page',
+    templateUrl: './login-page.component.html',
+    styleUrls: ['./login-page.component.scss'],
+    standalone: true
 })
 export class LoginPageComponent implements OnInit {
 

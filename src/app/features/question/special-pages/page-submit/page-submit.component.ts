@@ -1,18 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../../../../services/question.service";
 import {NavigationService} from "../../../../services/navigation.service";
-import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import { FormControl, FormGroup, ValidationErrors, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import {FirestoreService} from "../../../../services/firestore.service";
 import {SignupData} from "../../../../models/signup.model";
-import {KeyValue} from "@angular/common";
-import {TranslateService} from "@ngx-translate/core";
+import { KeyValue, NgIf, NgFor, AsyncPipe, KeyValuePipe } from "@angular/common";
+import { TranslateService, TranslateModule } from "@ngx-translate/core";
 import {QuizService} from "../../../../services/quiz.service";
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-page-finish',
-  templateUrl: './page-submit.component.html',
-  styleUrls: ['./page-submit.component.scss']
+    selector: 'app-page-finish',
+    templateUrl: './page-submit.component.html',
+    styleUrls: ['./page-submit.component.scss'],
+    standalone: true,
+    imports: [NgIf, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, RouterLink, AsyncPipe, KeyValuePipe, TranslateModule]
 })
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
