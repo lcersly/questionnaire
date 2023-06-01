@@ -1,17 +1,13 @@
 <h1 mat-dialog-title>Edit admin: {{data.admin.name}}</h1>
 
-<div mat-dialog-content>
+<mat-dialog-content >
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput placeholder="Name of admin" [formControl]="nameControl">
   </mat-form-field>
+</mat-dialog-content>
 
-  <mat-form-field>
-    <mat-label>UID</mat-label>
-    <input matInput placeholder="UID" [formControl]="uidControl">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button (click)="cancelClick()" color="warn">Cancel</button>
-  <button mat-button (click)="addAdmin()" [disabled]="form.invalid">Add</button>
-</div>
+  <button mat-button (click)="editAdmin()" [disabled]="form.invalid">Save</button>
+</mat-dialog-actions>

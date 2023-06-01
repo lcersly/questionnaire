@@ -43,7 +43,7 @@ export class DialogAddAdminComponent {
       return
     }
 
-    this.adminService.addAdmin(this.form.value as Admin).subscribe(() => this.dialogRef.close());
+    this.adminService.setAdminAndDetails(this.form.value as Admin).subscribe(() => this.dialogRef.close());
   }
 
   get nameControl() {

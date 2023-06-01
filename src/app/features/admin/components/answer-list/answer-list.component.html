@@ -30,15 +30,15 @@
           <mat-icon [matBadge]="dataSource.data.length">ballot</mat-icon>
         </div>
         <div>
-          Not picked
+          <span>Not picked</span>
           <mat-icon [matBadge]="getSignupCount()">quiz</mat-icon>
         </div>
         <div>
-          Notified
+          <span>Not notified</span>
           <mat-icon [matBadge]="getSignupCount('notified')">done</mat-icon>
         </div>
         <div>
-          Redeemed
+          <span>Redeemed</span>
           <mat-icon [matBadge]="getSignupCount('redeemed')">done_all</mat-icon>
         </div>
       </div>

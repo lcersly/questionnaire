@@ -62,7 +62,10 @@ export class AdminService {
     return doc(this.collection, id);
   }
 
-  addAdmin(admin: Admin) {
+  /**
+   * Overwrites whatever admin info is currently at that location
+   */
+  setAdminAndDetails(admin: Admin) {
     return from(setDoc(this.getDoc(admin.uid), admin)); //uid is also stored as a field
   }
 

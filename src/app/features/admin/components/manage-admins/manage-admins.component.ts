@@ -63,6 +63,6 @@ export class ManageAdminsComponent implements OnInit, OnDestroy {
   }
 
   editUser(element: Admin) {
-    this.dialog.open(DialogEditAdminComponent, {data: {admin: element} as DialogEditAdminData});
+    this.dialog.open(DialogEditAdminComponent, {data: {admin: element} as DialogEditAdminData, minWidth: 400});
   }
 }
