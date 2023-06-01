@@ -22,7 +22,7 @@ import {ManageAdminsComponent} from './components/manage-admins/manage-admins.co
 import {AdminHeaderComponent} from './components/admin-header/admin-header.component';
 import {MatListModule} from "@angular/material/list";
 import {AdminService} from "./admin.service";
-import {DialogAddAdminComponent} from "./components/manage-admins/add-admin-dialog/dialog-add-admin.component";
+import {DialogEditAdminComponent} from "./components/manage-admins/add-admin-dialog/dialog-edit-admin.component";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {getApp} from "@angular/fire/app";
@@ -42,7 +42,7 @@ import {
     AdminRootComponent,
     DialogQuizPickComponent,
     DialogSignupPickedComponent,
-    DialogAddAdminComponent,
+    DialogEditAdminComponent,
     DialogSignupEditMultipleComponent,
     ManageAdminsComponent,
     AdminHeaderComponent,

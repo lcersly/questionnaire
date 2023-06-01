@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add new Admin</h1>
+
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Name of admin" [formControl]="nameControl">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>UID</mat-label>
+    <input matInput placeholder="UID" [formControl]="uidControl">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancelClick()" color="warn">Cancel</button>
+  <button mat-button (click)="addAdmin()" [disabled]="form.invalid">Add</button>
+</div>
