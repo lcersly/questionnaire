@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {Auth} from "@angular/fire/auth";
-import {Router} from "@angular/router";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {SignupFull, Status} from "../../../../models/signup.model";
 import {MatSort, MatSortModule} from "@angular/material/sort";
@@ -24,12 +23,13 @@ import {
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {LocalizedDatePipe} from "../../localized-date.pipe";
 import {AdminHeaderComponent} from "../admin-header/admin-header.component";
-import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
+import {AsyncPipe, JsonPipe, NgClass, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-answer-list',
@@ -48,7 +48,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatSortModule,
     MatTooltipModule,
     MatCheckboxModule,
-    JsonPipe
+    JsonPipe,
+    NgClass
   ],
   standalone: true
 })
@@ -56,7 +57,7 @@ export class AnswerListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<SignupFull>([]);
   selection = new SelectionModel<SignupFull>(true, [], true, (o1, o2) => o1.id == o2.id);
   private onDestroy = new Subject<void>();
-  displayedColumns = ['select', 'name', 'mobile', 'email', 'quizId', 'signupTime', 'status'];
+  displayedColumns = ['select', 'name', 'contact-info', 'quizId', 'signupTime', 'status'];
   public isConnected?: boolean = undefined;
 
   @ViewChild(MatSort)

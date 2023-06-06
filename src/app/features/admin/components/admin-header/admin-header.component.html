@@ -2,9 +2,10 @@
   <span>Admin section</span>
   <div class="spacer"></div>
   <ng-container *ngIf="auth.currentUser">
-    <button routerLink="/admin/answers" mat-stroked-button *ngIf="!isActiveRoute('answers')" [disabled]="">Answers
+    <button routerLink="/admin/answers" mat-stroked-button [disabled]="isActiveRoute('answers')">
+      Answers
     </button>
-    <button routerLink="/admin/manage-admins" mat-stroked-button *ngIf="!isActiveRoute('manage-admins')">
+    <button routerLink="/admin/manage-admins" mat-stroked-button [disabled]="isActiveRoute('manage-admins')">
       Manage admins
     </button>
   </ng-container>
