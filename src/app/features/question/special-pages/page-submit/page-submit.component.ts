@@ -1,23 +1,24 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionService} from "../../../../services/question.service";
 import {NavigationService} from "../../../../services/navigation.service";
-import { FormControl, FormGroup, ValidationErrors, Validators, ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { ActivatedRoute, Router, RouterLink } from "@angular/router";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators} from "@angular/forms";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {FirestoreService} from "../../../../services/firestore.service";
 import {SignupData} from "../../../../models/signup.model";
-import { KeyValue, NgIf, NgFor, AsyncPipe, KeyValuePipe } from "@angular/common";
-import { TranslateService, TranslateModule } from "@ngx-translate/core";
-import {QuizService} from "../../../../services/quiz.service";
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {AsyncPipe, KeyValuePipe, NgFor, NgIf} from "@angular/common";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {QuizService, SignupInfo} from "../../../../services/quiz.service";
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {of} from "rxjs";
 
 @Component({
-    selector: 'app-page-finish',
-    templateUrl: './page-submit.component.html',
-    styleUrls: ['./page-submit.component.scss'],
-    standalone: true,
-    imports: [NgIf, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, RouterLink, AsyncPipe, KeyValuePipe, TranslateModule]
+  selector: 'app-page-finish',
+  templateUrl: './page-submit.component.html',
+  styleUrls: ['./page-submit.component.scss'],
+  standalone: true,
+  imports: [NgIf, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, RouterLink, AsyncPipe, KeyValuePipe, TranslateModule]
 })
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
@@ -70,7 +71,24 @@ export class PageSubmitComponent implements OnInit {
     if (storedPerson) {
       this.form.patchValue(JSON.parse(storedPerson));
     }
+
+    this.updateFieldsAvailable(this.quizService.quiz?.signupFields)
+
     this.form.valueChanges.subscribe(() => localStorage.setItem("person", JSON.stringify(this.form.value)))
+  }
+
+  private updateFieldsAvailable(signupInfo: SignupInfo | undefined) {
+    if (signupInfo && !signupInfo.name) {
+      this.nameControl.disable();
+    }
+
+    if (signupInfo && !signupInfo.email) {
+      this.emailControl.disable();
+    }
+
+    if (signupInfo && !signupInfo.mobile) {
+      this.mobileControl.disable();
+    }
   }
 
   submit() {
@@ -94,7 +112,13 @@ export class PageSubmitComponent implements OnInit {
     this.router.navigate(['..', 'start'], {relativeTo: this.route});
   }
 
-  getError(error: KeyValue<string, ValidationErrors>, section: string) {
-    return this.translateService.get(`special-pages.submit.correct.form.${section}.${error.key}`, error.value)
+  getError(error: ValidationErrors, section: string) {
+    const key = Object.keys(error)[0];
+
+    if (!key) {
+      return of("")
+    }
+
+    return this.translateService.get(`special-pages.submit.correct.form.${section}.${key}`, error[key])
   }
 }

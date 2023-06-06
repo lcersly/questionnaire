@@ -14,7 +14,7 @@ service cloud.firestore {
     match /signups/{signupId} {
       allow create: if isSignedIn() &&
         request.resource.data.uid == request.auth.uid &&
-        request.resource.data.keys().hasAll(['name', 'email', 'mobile', 'signupTime', 'uid', 'quizId']);
+        request.resource.data.keys().hasAll(['signupTime', 'uid', 'quizId']);
       allow get,update,delete,list: if isAdmin();
     }
 

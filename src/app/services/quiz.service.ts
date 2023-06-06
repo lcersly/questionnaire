@@ -7,9 +7,15 @@ import {Question} from "../models/question.model";
 import {QuestionService} from "./question.service";
 import {QuestionsBankdata} from "./questions/bankdata";
 
+export type SignupInfo = {
+  name: boolean,
+  email: boolean,
+  mobile: boolean,
+};
 export type Quiz = {
   name: string;
   route: string;
+  signupFields?: SignupInfo
   questions: Question[]
 };
 
@@ -37,6 +43,11 @@ const quizes: Record<string, Quiz> = {
   'ucl': {
     name: 'UCL',
     route: 'ucl',
+    signupFields: {
+      name: true,
+      email: true,
+      mobile: false,
+    },
     questions: [
       QuestionsREST["idempotent-method"],
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
