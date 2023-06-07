@@ -43,6 +43,15 @@ const quizes: Record<string, Quiz> = {
   'ucl': {
     name: 'UCL',
     route: 'ucl',
+    questions: [
+      QuestionsREST["idempotent-method"],
+      QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
+      QuestionsCode["advanced-addition"],
+    ]
+  },
+  'facebook': {
+    name: 'Facebook',
+    route: 'facebook',
     signupFields: {
       name: true,
       email: true,
