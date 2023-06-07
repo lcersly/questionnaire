@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{data.signup.name}}</h1>
 
-<div mat-dialog-content>
+<mat-dialog-content >
   <table>
     <tr>
       <th>Mail</th>
@@ -12,17 +12,19 @@
     </tr>
     <tr>
       <th>Send SMS</th>
-      <td><a [href]="'sms:'+data.signup.mobile">{{data.signup.mobile}}</a></td>
+      <td><a
+        [href]="'sms:' + data.signup.mobile + '?body=Tillykke!%0D%0Adu har vundet i Bankdatas quiz. Kom og hent din præmie ved standen'">{{data.signup.mobile}}</a>
+      </td>
     </tr>
     <tr>
       <th>Quiz</th>
       <td>{{data.signup.quizId}}</td>
     </tr>
   </table>
-</div>
-<div mat-dialog-actions>
+</mat-dialog-content>
+<mat-dialog-actions >
   <button mat-flat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
   <button mat-flat-button (click)="markContacted()" color="primary">
     Mark contacted
   </button>
-</div>
+</mat-dialog-actions>

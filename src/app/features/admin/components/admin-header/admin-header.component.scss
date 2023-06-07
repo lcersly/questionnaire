@@ -1,3 +1,21 @@
 .spacer {
   flex-grow: 1;
 }
+
+@media only screen and (max-width: 800px) {
+  button[disabled=true] {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #content {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  #logout {
+    display: none;
+  }
+}

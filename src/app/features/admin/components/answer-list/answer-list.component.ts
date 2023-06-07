@@ -1,10 +1,9 @@
 import {Component, OnDestroy, OnInit, Optional, ViewChild} from '@angular/core';
 import {Auth} from "@angular/fire/auth";
-import {Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
+import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {SignupFull, Status} from "../../../../models/signup.model";
-import {MatSort} from "@angular/material/sort";
-import {Subject, takeUntil} from "rxjs";
+import {MatSort, MatSortModule} from "@angular/material/sort";
+import {async, Subject, takeUntil} from "rxjs";
 import {SignupService} from "../../signup.service";
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatDialog} from "@angular/material/dialog";
@@ -21,17 +20,44 @@ import {
   DialogSignupEditMultipleComponent,
   DialogSignupEditMultipleData
 } from "./edit-multiple-dialog/dialog-signup-edit-multiple.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {LocalizedDatePipe} from "../../localized-date.pipe";
+import {AdminHeaderComponent} from "../admin-header/admin-header.component";
+import {AsyncPipe, JsonPipe, NgClass, NgIf} from "@angular/common";
+import {MatButtonModule} from "@angular/material/button";
+import {MatBadgeModule} from "@angular/material/badge";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-answer-list',
   templateUrl: './answer-list.component.html',
-  styleUrls: ['./answer-list.component.scss']
+  styleUrls: ['./answer-list.component.scss'],
+  imports: [
+    MatProgressSpinnerModule,
+    LocalizedDatePipe,
+    AdminHeaderComponent,
+    NgIf,
+    MatButtonModule,
+    MatBadgeModule,
+    AsyncPipe,
+    MatIconModule,
+    MatTableModule,
+    MatSortModule,
+    MatTooltipModule,
+    MatCheckboxModule,
+    JsonPipe,
+    NgClass
+  ],
+  standalone: true
 })
 export class AnswerListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<SignupFull>([]);
   selection = new SelectionModel<SignupFull>(true, [], true, (o1, o2) => o1.id == o2.id);
   private onDestroy = new Subject<void>();
-  displayedColumns = ['select', 'name', 'mobile', 'email', 'quizId', 'signupTime', 'status'];
+  displayedColumns = ['select', 'name', 'contact-info', 'quizId', 'signupTime', 'status'];
   public isConnected?: boolean = undefined;
 
   @ViewChild(MatSort)
@@ -173,4 +199,6 @@ export class AnswerListComponent implements OnInit, OnDestroy {
       autoFocus: false
     });
   }
+
+  protected readonly async = async;
 }

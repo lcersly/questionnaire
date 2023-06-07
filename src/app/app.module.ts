@@ -21,49 +21,4 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 registerLocaleData(localeDa, 'da')
 
-@NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    // firebase init
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => {
-      const auth = getAuth();
-      // auth.setPersistence({type: "SESSION"});
-      if (environment.useEmulators) {
-        console.info("Using emulator for authentication")
-        connectAuthEmulator(auth, 'http://localhost:9099', {disableWarnings: true});
-      }
-      return auth;
-    }),
-    provideFirestore(() => {
-      const firestore = getFirestore();
-      if (environment.useEmulators) {
-        console.info("Using emulator for user firestore")
-        connectFirestoreEmulator(firestore, 'localhost', 8080);
-      }
-      return firestore;
-    }), //uses lite version of firestore
 
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    QuestionModule,
-    MatCardModule,
-
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}

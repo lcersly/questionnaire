@@ -1,12 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import {PageElement} from "../../../../models/page-element.model";
 import {QuestionService} from "../../../../services/question.service";
+import { CodePageElementComponent } from '../../shared/code-page-element/code-page-element.component';
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault } from '@angular/common';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
-  selector: 'app-question-answers',
-  templateUrl: './question-answer-options.component.html',
-  styleUrls: ['./question-answer-options.component.scss']
+    selector: 'app-question-answers',
+    templateUrl: './question-answer-options.component.html',
+    styleUrls: ['./question-answer-options.component.scss'],
+    standalone: true,
+    imports: [MatRadioModule, ReactiveFormsModule, NgFor, NgSwitch, NgSwitchCase, CodePageElementComponent, NgSwitchDefault]
 })
 export class QuestionAnswerOptionsComponent implements OnInit {
   public form = new FormControl();

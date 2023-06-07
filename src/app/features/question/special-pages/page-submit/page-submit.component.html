@@ -3,29 +3,29 @@
   <p>{{'special-pages.submit.correct.header.CONTACT' | translate}}</p>
 
   <form (ngSubmit)="submit()">
-    <mat-form-field>
+    <mat-form-field *ngIf="!nameControl.disabled">
+      <mat-label>{{'special-pages.submit.correct.form.name.label' | translate}}</mat-label>
+      <input type="text" matInput [formControl]="nameControl" autocomplete="name">
+      <mat-error *ngIf="nameControl.errors"
+                 [innerHTML]="getError(nameControl.errors,'nameValidation') | async"
+      ></mat-error>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="!emailControl.disabled">
       <mat-label>{{'special-pages.submit.correct.form.email.label' | translate}}</mat-label>
       <input type="email" matInput [formControl]="emailControl"
              [placeholder]="'special-pages.submit.correct.form.email.placeholder' | translate"
              autocomplete="email">
-      <mat-error *ngFor="let error of emailControl.errors | keyvalue"
-                 [innerHTML]="getError(error, 'emailValidation') | async"
+      <mat-error *ngIf="emailControl.errors"
+                 [innerHTML]="getError(emailControl.errors,'emailValidation') | async"
       ></mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>{{'special-pages.submit.correct.form.name.label' | translate}}</mat-label>
-      <input type="text" matInput [formControl]="nameControl" autocomplete="name">
-      <mat-error *ngFor="let error of nameControl.errors | keyvalue"
-                 [innerHTML]="getError(error, 'nameValidation') | async"
-      ></mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
+    <mat-form-field *ngIf="!mobileControl.disabled">
       <mat-label>{{'special-pages.submit.correct.form.mobile.label' | translate}}</mat-label>
       <input type="tel" matInput [formControl]="mobileControl" autocomplete="tel">
-      <mat-error *ngFor="let error of mobileControl.errors | keyvalue"
-                 [innerHTML]="getError(error, 'mobileValidation') | async"
+      <mat-error *ngIf="mobileControl.errors"
+                 [innerHTML]="getError(mobileControl.errors, 'mobileValidation') | async"
       ></mat-error>
     </mat-form-field>
 

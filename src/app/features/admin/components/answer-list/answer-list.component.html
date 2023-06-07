@@ -26,25 +26,25 @@
 
       <div class="stats">
         <div>
-          <span>Signups</span>
+          <span>Total signups</span>
           <mat-icon [matBadge]="dataSource.data.length">ballot</mat-icon>
         </div>
         <div>
-          Not picked
+          <span>Not picked</span>
           <mat-icon [matBadge]="getSignupCount()">quiz</mat-icon>
         </div>
         <div>
-          Notified
+          <span>Notified</span>
           <mat-icon [matBadge]="getSignupCount('notified')">done</mat-icon>
         </div>
         <div>
-          Redeemed
+          <span>Redeemed</span>
           <mat-icon [matBadge]="getSignupCount('redeemed')">done_all</mat-icon>
         </div>
       </div>
     </div>
 
-    <div id="table-container" class="mat-elevation-z8">
+    <div id="table-container">
       <table mat-table [dataSource]="dataSource"
              matSort
              matSortActive="signupTime"
@@ -55,6 +55,17 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header="signupTime">Signup time</th>
           <td mat-cell *matCellDef="let element">{{element.signupTime | localizedDate:'short'}}</td>
         </ng-container>
+
+        <ng-container matColumnDef="contact-info">
+          <th mat-header-cell *matHeaderCellDef> Contact</th>
+          <td mat-cell *matCellDef="let element">
+            <div class="contact-info">
+              <span *ngIf="element.mobile">{{element.mobile}}</span>
+              <span *ngIf="element.email">{{element.email}}</span>
+            </div>
+          </td>
+        </ng-container>
+
 
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="name"> Name</th>
@@ -106,7 +117,8 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"
+            [ngClass]="{'selected': selection.isSelected(row)}"></tr>
       </table>
     </div>
   </ng-container>

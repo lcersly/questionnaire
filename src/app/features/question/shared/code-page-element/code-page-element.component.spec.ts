@@ -8,8 +8,8 @@ describe('CodeAnswerOptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CodePageElementComponent]
-    })
+    imports: [CodePageElementComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(CodePageElementComponent);

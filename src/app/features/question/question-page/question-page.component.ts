@@ -5,11 +5,16 @@ import {QuestionService} from "../../../services/question.service";
 import {TranslateService} from "@ngx-translate/core";
 import {combineLatest} from "rxjs";
 import {QuizService} from "../../../services/quiz.service";
+import { NavigationButtonsComponent } from '../shared/navigation-buttons/navigation-buttons.component';
+import { QuestionAnswerOptionsComponent } from './question-answer-options/question-answer-options.component';
+import { QuestionTextComponent } from './question-text/question-text.component';
 
 @Component({
-  selector: 'app-question-page',
-  templateUrl: './question-page.component.html',
-  styleUrls: ['./question-page.component.scss']
+    selector: 'app-question-page',
+    templateUrl: './question-page.component.html',
+    styleUrls: ['./question-page.component.scss'],
+    standalone: true,
+    imports: [QuestionTextComponent, QuestionAnswerOptionsComponent, NavigationButtonsComponent]
 })
 export class QuestionPageComponent implements OnInit {
 

@@ -36,49 +36,45 @@ import {
 
 
 @NgModule({
-  declarations: [
-    LoginPageComponent,
-    AnswerListComponent,
-    AdminRootComponent,
-    DialogQuizPickComponent,
-    DialogSignupPickedComponent,
-    DialogAddAdminComponent,
-    DialogSignupEditMultipleComponent,
-    ManageAdminsComponent,
-    AdminHeaderComponent,
-    LocalizedDatePipe
-  ],
-  imports: [
-    provideFirestore(() => {
-      //experimentalForceLongPolling is needed. Otherwise, the BD proxy will block the requests to firestore.
-      const firestore = initializeFirestore(getApp(), {experimentalForceLongPolling: true});
-      if (environment.useEmulators) {
-        console.info("Using emulator for admin firestore");
-        connectFirestoreEmulator(firestore, 'localhost', 8080);
-      }
-      return firestore
-    }),
-    CommonModule,
-    MatButtonModule,
-    AdminRoutingModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSortModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatProgressSpinnerModule,
-    MatListModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatBadgeModule,
-    MatTooltipModule,
-    //uses lite version of firestore
-  ],
-  providers: [
-    SignupService,
-    AdminService,
-  ]
+    imports: [
+        provideFirestore(() => {
+            //experimentalForceLongPolling is needed. Otherwise, the BD proxy will block the requests to firestore.
+            const firestore = initializeFirestore(getApp(), { experimentalForceLongPolling: true });
+            if (environment.useEmulators) {
+                console.info("Using emulator for admin firestore");
+                connectFirestoreEmulator(firestore, 'localhost', 8080);
+            }
+            return firestore;
+        }),
+        CommonModule,
+        MatButtonModule,
+        AdminRoutingModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatSortModule,
+        MatIconModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatListModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatBadgeModule,
+        MatTooltipModule,
+        LoginPageComponent,
+        AnswerListComponent,
+        AdminRootComponent,
+        DialogQuizPickComponent,
+        DialogSignupPickedComponent,
+        DialogSignupEditMultipleComponent,
+        ManageAdminsComponent,
+        AdminHeaderComponent,
+        LocalizedDatePipe
+    ],
+    providers: [
+        SignupService,
+        AdminService,
+    ]
 })
 export class AdminModule {
 }

@@ -25,46 +25,44 @@ import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
-  declarations: [
-    NavigationButtonsComponent,
-    PageSubmitComponent,
-    QuestionRootComponent,
-    PageStartComponent,
-    QuestionTextComponent,
-    QuestionAnswerOptionsComponent,
-    PageThanksComponent,
-    HeaderComponent,
-    QuestionPageComponent,
-    CodePageElementComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatButtonModule,
-    MatRadioModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatProgressBarModule,
-    HighlightModule,
-    TranslateModule.forChild({extend: true})
-  ],
-  providers: [{
-    provide: HIGHLIGHT_OPTIONS,
-    useValue: {
-      coreLibraryLoader: () => import('highlight.js/lib/core'),
-      languages: {
-        typescript: () => import('highlight.js/lib/languages/typescript'),
-        javascript: () => import('highlight.js/lib/languages/javascript'),
-        scala: () => import('highlight.js/lib/languages/scala'),
-        java: () => import('highlight.js/lib/languages/java'),
-        // css: () => import('highlight.js/lib/languages/css'),
-        // xml: () => import('highlight.js/lib/languages/xml')
-      },
-    }
-  }],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatButtonModule,
+        MatRadioModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatProgressBarModule,
+        HighlightModule,
+        TranslateModule.forChild({ extend: true }),
+        NavigationButtonsComponent,
+        PageSubmitComponent,
+        QuestionRootComponent,
+        PageStartComponent,
+        QuestionTextComponent,
+        QuestionAnswerOptionsComponent,
+        PageThanksComponent,
+        HeaderComponent,
+        QuestionPageComponent,
+        CodePageElementComponent
+    ],
+    providers: [{
+            provide: HIGHLIGHT_OPTIONS,
+            useValue: {
+                coreLibraryLoader: () => import('highlight.js/lib/core'),
+                languages: {
+                    typescript: () => import('highlight.js/lib/languages/typescript'),
+                    javascript: () => import('highlight.js/lib/languages/javascript'),
+                    scala: () => import('highlight.js/lib/languages/scala'),
+                    java: () => import('highlight.js/lib/languages/java'),
+                    // css: () => import('highlight.js/lib/languages/css'),
+                    // xml: () => import('highlight.js/lib/languages/xml')
+                },
+            }
+        }]
 })
 export class QuestionModule {
 }

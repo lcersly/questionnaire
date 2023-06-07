@@ -1,10 +1,18 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatButtonModule} from "@angular/material/button";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-dialog-delete',
   templateUrl: './dialog-quiz-pick.component.html',
   styleUrls: ['./dialog-quiz-pick.component.scss'],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    NgForOf
+  ],
+  standalone: true
 })
 export class DialogQuizPickComponent {
   constructor(
