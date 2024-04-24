@@ -28,7 +28,12 @@ const quizes: Record<string, Quiz> = {
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["referential-transparent"],
       QuestionsCode["addition-of-numbers"]
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    }
   },
   'bankdata': {
     name: 'Bankdata',
@@ -38,7 +43,12 @@ const quizes: Record<string, Quiz> = {
       QuestionsBankdata["the-whole-person"],
       QuestionsBankdata["devops-mindset"],
       QuestionsBankdata["working-expectations"],
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    }
   },
   'ucl': {
     name: 'UCL',
@@ -47,7 +57,12 @@ const quizes: Record<string, Quiz> = {
       QuestionsREST["idempotent-method"],
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["advanced-addition"],
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    }
   },
   'facebook': {
     name: 'Facebook',

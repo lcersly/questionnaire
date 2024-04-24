@@ -15,11 +15,8 @@ export interface Admin extends AdminDatabase {
   providedIn: null
 })
 export class AdminService {
-  private admins = new ReplaySubject<QuerySnapshot<Admin> | null>()
-  public readonly admins$ = this.admins.pipe(
-    map((next) => next ? next.docs : null),
-    map(data => data ? data.map(doc => doc.data()) : null)
-  );
+  private admins = new ReplaySubject<Admin[] | null>()
+  public readonly admins$ = this.admins.asObservable()
 
   private unsubscribe?: Unsubscribe;
 
@@ -34,7 +31,7 @@ export class AdminService {
     console.debug("Connecting to admins");
 
     this.unsubscribe = onSnapshot(this.collection, next => {
-      this.admins.next(next);
+      this.admins.next(next.docs.map(e => e.data() as Admin));
     }, error => {
       console.error("Error connecting to admin firebase list", error);
       if (this.unsubscribe) {

@@ -1,18 +1,24 @@
 import {Injectable} from '@angular/core';
-import {DocumentData, FirestoreDataConverter, QuerySnapshot} from 'firebase/firestore';
+import {DocumentData, FirestoreDataConverter} from 'firebase/firestore';
 import {SignupDatabase, SignupFull, Status} from "../../models/signup.model";
-import {collection, doc, Firestore, onSnapshot, Unsubscribe, updateDoc, writeBatch} from "@angular/fire/firestore";
-import {BehaviorSubject, from, map, ReplaySubject} from "rxjs";
+import {
+  collection,
+  doc,
+  Firestore,
+  onSnapshot,
+  QueryDocumentSnapshot,
+  Unsubscribe,
+  updateDoc,
+  writeBatch
+} from "@angular/fire/firestore";
+import {BehaviorSubject, from, ReplaySubject} from "rxjs";
 
 @Injectable({
   providedIn: null
 })
 export class SignupService {
-  private signups = new ReplaySubject<QuerySnapshot<SignupFull> | null>()
-  public readonly signups$ = this.signups.pipe(
-    map((next) => next ? next.docs : null),
-    map(data => data ? data.map(doc => doc.data()) : null)
-  );
+  private signups = new ReplaySubject<SignupFull[] | null>()
+  public readonly signups$ = this.signups.asObservable();
 
   public readonly isConnected$ = new BehaviorSubject<boolean>(false);
   public readonly isAdmin$ = new BehaviorSubject<boolean | undefined>(undefined);
@@ -32,7 +38,7 @@ export class SignupService {
     this.isConnected$.next(false);
 
     this.unsubscribe = onSnapshot(this.collection, next => {
-      this.signups.next(next);
+      this.signups.next(next.docs.map(doc => doc.data() as SignupFull));
       this.isConnected$.next(true);
       this.isAdmin$.next(true);
     }, error => {
@@ -108,10 +114,14 @@ const converter: FirestoreDataConverter<SignupFull> = {
     delete signup.id;
     return signup;
   },
-  fromFirestore(snapshot): SignupFull {
-    let documentData = snapshot.data() as SignupDatabase;
+  fromFirestore(snapshot: QueryDocumentSnapshot<SignupDatabase>): SignupFull {
+    let documentData = snapshot.data();
     return {
-      ...documentData,
+      email: documentData.email,
+      mobile: documentData.mobile,
+      name: documentData.name,
+      status: documentData.status,
+      uid: documentData.uid,
       signupTime: documentData.signupTime.toDate(),
       id: snapshot.id
     } as SignupFull

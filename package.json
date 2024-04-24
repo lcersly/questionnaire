@@ -29,7 +29,7 @@
     "@angular/router": "^17.3.5",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "firebase": "^9.9.0",
+    "firebase": "^10.11.0",
     "ngx-highlightjs": "^7.0.1",
     "rxjs": "~7.8.1",
     "tslib": "^2.3.0",
