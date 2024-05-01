@@ -32,13 +32,16 @@
             "maxlength": "Cannot be longer than <strong>{{requiredLength}}</strong> digits",
             "pattern": "Invalid phone number"
           }
-        },
-        "disclaimer": "Ved deltagelse i denne quiz accepterer du, at vi registrerer dine kontaktoplysninger (navn og mobilnummer) udelukkende til brug for afviklingen af quizzen og lodtrækningen af en vinder. Vinderen kontaktes via sms under eventet, og præmien skal afhentes inden eventets afslutning. Præmier eftersendes ikke. Alle kontaktoplysninger slettes umiddelbart efter eventets afslutning og vil ikke blive videregivet eller anvendt til andre formål."
+        }
       },
       "incorrect": {
         "right-answers": "correct.",
         "you-answered-wrong": "You answered these wrong",
         "question": "Question"
+      },
+      "disclaimers": {
+        "common": "By participating in this quiz, you accept that we will register your contact information (name and mobile number) exclusively for the purpose of administering the quiz and drawing a winner. The winner will be contacted via text message during the event, and the prize must be collected before the event ends. Prizes will not be sent afterwards. All contact information will be deleted immediately after the event ends and will not be disclosed, distributed or used for any other purpose.",
+        "fb": "By participating in this quiz, you accept that we will register your contact information (name and email) exclusively for the purpose of administering the quiz and drawing a winner. All contact information will be deleted immediately after the quiz concludes and will not be disclosed, distributed or used for any other purpose. \n\nThis competition is not sponsored, endorsed by or otherwise associated with Meta."
       }
     },
     "buttons": {

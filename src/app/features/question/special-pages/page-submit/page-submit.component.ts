@@ -113,6 +113,10 @@ export class PageSubmitComponent implements OnInit {
     this.router.navigate(['..', 'start'], {relativeTo: this.route});
   }
 
+  public get disclaimerTranslationKey(){
+    return this.quizService.quiz?.dataDisclaimerTranslationKey ?? '';
+  }
+
   getError(error: ValidationErrors, section: string) {
     const key = Object.keys(error)[0];
 
