@@ -12,13 +12,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {of} from "rxjs";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @Component({
   selector: 'app-page-finish',
   templateUrl: './page-submit.component.html',
   styleUrls: ['./page-submit.component.scss'],
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, RouterLink, AsyncPipe, KeyValuePipe, TranslateModule]
+  imports: [NgIf, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, RouterLink, AsyncPipe, KeyValuePipe, TranslateModule, MatExpansionModule]
 })
 export class PageSubmitComponent implements OnInit {
   public form = new FormGroup({
@@ -110,6 +111,10 @@ export class PageSubmitComponent implements OnInit {
   startOver() {
     this.questionService.resetQuestionnaire();
     this.router.navigate(['..', 'start'], {relativeTo: this.route});
+  }
+
+  public get disclaimerTranslationKey(){
+    return this.quizService.quiz?.dataDisclaimerTranslationKey ?? '';
   }
 
   getError(error: ValidationErrors, section: string) {

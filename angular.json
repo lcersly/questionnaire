@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "RecruitmentQuiz:build:production"
+              "buildTarget": "RecruitmentQuiz:build:production"
             },
             "development": {
-              "browserTarget": "RecruitmentQuiz:build:development"
+              "buildTarget": "RecruitmentQuiz:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "RecruitmentQuiz:build"
+            "buildTarget": "RecruitmentQuiz:build"
           }
         },
         "test": {

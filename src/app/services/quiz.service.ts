@@ -15,8 +15,10 @@ export type SignupInfo = {
 export type Quiz = {
   name: string;
   route: string;
-  signupFields?: SignupInfo
-  questions: Question[]
+  signupFields: SignupInfo
+  questions: Question[],
+  dataDisclaimerTranslationKey: string;
+  contactWinnerTranslationKey: string;
 };
 
 const quizes: Record<string, Quiz> = {
@@ -28,7 +30,14 @@ const quizes: Record<string, Quiz> = {
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["referential-transparent"],
       QuestionsCode["addition-of-numbers"]
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    },
+    dataDisclaimerTranslationKey: 'special-pages.submit.disclaimers.common',
+    contactWinnerTranslationKey: 'special-pages.thanks.contactBy.common'
   },
   'bankdata': {
     name: 'Bankdata',
@@ -38,7 +47,14 @@ const quizes: Record<string, Quiz> = {
       QuestionsBankdata["the-whole-person"],
       QuestionsBankdata["devops-mindset"],
       QuestionsBankdata["working-expectations"],
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    },
+    dataDisclaimerTranslationKey: 'special-pages.submit.disclaimers.common',
+    contactWinnerTranslationKey: 'special-pages.thanks.contactBy.common'
   },
   'ucl': {
     name: 'UCL',
@@ -47,7 +63,14 @@ const quizes: Record<string, Quiz> = {
       QuestionsREST["idempotent-method"],
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["advanced-addition"],
-    ]
+    ],
+    signupFields:{
+      name: true,
+      email: false,
+      mobile: true,
+    },
+    dataDisclaimerTranslationKey: 'special-pages.submit.disclaimers.common',
+    contactWinnerTranslationKey: 'special-pages.thanks.contactBy.common'
   },
   'facebook': {
     name: 'Facebook',
@@ -61,7 +84,9 @@ const quizes: Record<string, Quiz> = {
       QuestionsREST["idempotent-method"],
       QuestionsSprint["who-decides-what-the-team-works-on-in-the-sprint"],
       QuestionsCode["advanced-addition"],
-    ]
+    ],
+    dataDisclaimerTranslationKey: 'special-pages.submit.disclaimers.fb',
+    contactWinnerTranslationKey: 'special-pages.thanks.contactBy.fb'
   }
 };
 

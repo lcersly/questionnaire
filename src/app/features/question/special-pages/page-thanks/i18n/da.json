@@ -2,7 +2,10 @@
   "special-pages": {
     "thanks": {
       "THANKYOU": "Tak for din deltagelse.",
-      "CONTACTBY": "Vi kontakter dig via SMS hvis du bliver udtrukket."
+      "contactBy": {
+        "common": "Vi kontakter dig via SMS hvis du bliver udtrukket.",
+        "fb": "Vi kontakter dig via e-mail hvis du bliver udtrukket."
+      }
     }
   }
 }

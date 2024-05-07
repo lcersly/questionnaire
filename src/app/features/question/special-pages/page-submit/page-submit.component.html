@@ -29,12 +29,16 @@
       ></mat-error>
     </mat-form-field>
 
-    <button mat-raised-button routerLink="../4" type="button">
-      {{'special-pages.buttons.back' | translate}}
-    </button>
-    <button mat-raised-button>
-      {{'special-pages.buttons.send_results' | translate}}
-    </button>
+    <div id="buttons">
+      <button mat-raised-button routerLink="../4" type="button">
+        {{'special-pages.buttons.back' | translate}}
+      </button>
+      <button mat-raised-button>
+        {{'special-pages.buttons.send_results' | translate}}
+      </button>
+    </div>
+
+    <div id="disclaimer">{{ disclaimerTranslationKey | translate }}</div>
   </form>
 </ng-container>
 
